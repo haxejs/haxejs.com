@@ -1,0 +1,20 @@
+-cp src
+-js www/js/app.js
+-main com.haxejs.App
+-lib haxejs-angular
+
+--next
+-cp src
+-js www/js/app.embed.js
+-main com.haxejs.App
+-lib haxejs-angular
+-D embed_js
+-cmd "cp -R www/*  ../"
+
+--next
+-cp src
+-js test/unit/unitSpec.bundle.js
+-main Unit
+-lib haxejs-angular
+-D embed_js
+
