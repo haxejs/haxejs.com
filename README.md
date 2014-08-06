@@ -18,7 +18,7 @@ It can embed javascript libraries you used automatically, or copy them to a poin
 Angularjs is elegant and well designed, and it is the core of haxejs framework, many good javascript libraries based on angularjs are integrated/added seemlessly.
 
 4) Write Unit and E2E tests easier.
-Jasmine, karat, protractor are included.
+Jasmine, karma, protractor are included.
 
 5) Best suited for very complicated SPA(single page app) 
 
