@@ -21,11 +21,18 @@ com.haxejs.App.main = function() {
 		if(window.hxdeps) deps = window.hxdeps; else deps = [];
 		ng.Angular.module("com.haxejs",deps);
 	}
-	com.haxejs.App.runConfig.$inject = ["$logProvider"];
+	com.haxejs.App.ieAjaxConfig.$inject = ["$httpProvider"];
+	com.haxejs.App.runConfig.$inject = ["$routeProvider"];
 	ng.Angular.module("com.haxejs").config(com.haxejs.App.runConfig);
+	ng.Angular.module("com.haxejs").config(com.haxejs.App.ieAjaxConfig);
 };
-com.haxejs.App.runConfig = function(logProvider) {
-	logProvider.debugEnabled(false);
+com.haxejs.App.runConfig = function(routeProvider) {
+	routeProvider.when("/home",new ng.RouteMapping().set_templateUrl("partials/home.html"));
+	routeProvider.when("/getstarted",new ng.RouteMapping().set_templateUrl("partials/getstarted.html"));
+	routeProvider.otherwise(new ng.RouteMapping().set_redirectTo("/home"));
+};
+com.haxejs.App.ieAjaxConfig = function(httpProvider) {
+	httpProvider.defaults.headers.common["Cache-Control"] = "no-cache";
 };
 ng._Angular = {};
 ng._Angular.NgAnchorScroll_Impl_ = function() { };
@@ -313,10 +320,72 @@ ng._Angular.NgFilter_Impl_ = function() { };
 ng._Angular.NgFilter_Impl_.run = function(this1,name) {
 	return this1(name);
 };
+ng.RouteMapping = function() {
+};
+ng.RouteMapping.prototype = {
+	set_controller: function(val) {
+		this.controller = val;
+		return this;
+	}
+	,get_controller: function() {
+		return this.controller;
+	}
+	,set_controllerAs: function(val) {
+		this.controllerAs = val;
+		return this;
+	}
+	,get_controllerAs: function() {
+		return this.controllerAs;
+	}
+	,set_template: function(val) {
+		this.template = val;
+		return this;
+	}
+	,get_template: function() {
+		return this.template;
+	}
+	,set_templateUrl: function(val) {
+		this.templateUrl = val;
+		return this;
+	}
+	,get_templateUrl: function() {
+		return this.templateUrl;
+	}
+	,set_resolve: function(val) {
+		this.resolve = val;
+		return this;
+	}
+	,get_resolve: function() {
+		return this.resolve;
+	}
+	,set_redirectTo: function(val) {
+		this.redirectTo = val;
+		return this;
+	}
+	,get_redirectTo: function() {
+		return this.redirectTo;
+	}
+	,set_reloadOnSearch: function(val) {
+		this.reloadOnSearch = val;
+		return this;
+	}
+	,get_reloadOnSearch: function() {
+		return this.reloadOnSearch;
+	}
+	,set_caseInsensitiveMatch: function(val) {
+		this.caseInsensitiveMatch = val;
+		return this;
+	}
+	,get_caseInsensitiveMatch: function() {
+		return this.caseInsensitiveMatch;
+	}
+};
 ng.macro = {};
 ng.macro.InjectionBuilder = function() { };
 ng.Angular = window.angular;
 var q = window.jQuery;
 ng.JQuery = q;
+if(ng.Angular.isUndefined(window.hxdeps)) window.hxdeps = [];
+window.hxdeps.push("ngRoute");
 com.haxejs.App.main();
 })();
