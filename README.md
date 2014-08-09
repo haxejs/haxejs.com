@@ -4,8 +4,8 @@ haxejs.com
 The landing page for haxejs.com
 
 
-Haxejs — Mobile First 框架设计
-Haxejs — The next generation mobile first framework
+Haxejs — Angularjs Ecosystem Hub
+Haxejs — The next generation mobile first framework, born for large scale mobile/web app
 
 Props:
 1) Write javascript code easier, zero learn curve
