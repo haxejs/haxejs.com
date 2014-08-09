@@ -1,13 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- Meta, title, CSS, favicons, etc. -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Haxejs - The next generation mobile first framework</title>
+    <meta name="description" content="Haxejs, angularjs ecosystem hub, the next generation mobile first framework.">
+    <meta name="keywords" content="Haxejs, Haxe, Mobile, Angular, Angularjs,Ionic,HTML5, Dart,Polymer, JS, JavaScript, framework, bootstrap, front-end, frontend, web development">
+    <meta name="author" content="Richard Shi, and Haxejs contributors">
 
-    <!-- Bootstrap -->
+    <title>
+        Haxejs,angularjs ecosystem hub
+    </title>
+
+    <!-- Bootstrap core CSS -->
     <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Documentation extras -->
+    <link href="css/docs.min.css" rel="stylesheet">
+
+    <!-- Original Bootstrap's CSS depends on empty href attributes to style cursors for several components (pagination, tabs etc.). 
+         But in AngularJS adding empty href attributes to link tags will cause unwanted route changes.  
+         This is why we need to remove empty href attributes from directive templates and as a result styling is not applied correctly. 
+         The remedy is simple, just add the following styling to your application:
+    -->
+    <style type="text/css">.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }</style>
+
+    <!-- To make AngularJS work with IE7 and earlier, we need to polyfill JSON.stringify. -->
+    <!--[if lt IE 9]>
+      <script src="bower_components/json3/lib/json3.min.js"></script>
+    <![endif]-->
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -15,13 +36,175 @@
       <script src="bower_components/html5shiv/dist/html5shiv.min.js"></script>
       <script src="bower_components/respond/dest/respond.min.js"></script>
     <![endif]-->
+
+    <!-- Add angularjs and your custom tags here -->
+    <!--[if lt IE 9]>
+      <script>
+        //window.myCustomTags = ["alert"]; // optional
+      </script>
+      <script src="bower_components/angular-ui-utils/ui-utils-ieshiv.min.js"></script>
+    <![endif]-->
+
+    <!--[if lt IE 9]>
+    <script src="js/ie8-responsive-file-warning.js"></script>
+    <![endif]-->
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="js/ie10-viewport-bug-workaround.js"></script>
+    <script src="js/ie-emulation-modes-warning.js"></script>
+
+    <!-- Favicons -->
+    <link rel="apple-touch-icon-precomposed" href="apple-touch-icon-precomposed.png">
+    <link rel="icon" href="favicon.ico">
+
   </head>
-  <body>
-    <h1>This site is under heavy construction!</h1>
+  <body class="bs-docs-home">
+    <a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <!-- Docs master nav -->
+    <header class="navbar navbar-static-top bs-docs-nav" id="top" role="banner">
+      <div class="container">
+        <div class="navbar-header">
+          <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a href="../" class="navbar-brand">Haxejs</a>
+        </div>
+        <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+        <!--
+          <ul class="nav navbar-nav">
+            <li>
+              <a href="../getting-started">Getting started</a>
+            </li>
+            <li>
+              <a href="../css">CSS</a>
+            </li>
+            <li>
+              <a href="../components">Components</a>
+            </li>
+            <li>
+              <a href="../javascript">JavaScript</a>
+            </li>
+            <li>
+              <a href="../customize">Customize</a>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="http://demo.haxejs.com" >Demo</a></li>
+            <li><a href="http://forum.haxejs.com" >Forum</a></li>
+          </ul>
+        -->
+        </nav>
+      </div>
+    </header>
+
+
+    <!-- Page content of course! -->
+    <main class="bs-docs-masthead" id="content" role="main">
+      <div class="container">
+      <!--
+        <span class="bs-docs-booticon bs-docs-booticon-lg bs-docs-booticon-outline">B</span>
+      -->
+        <h1>Haxejs, Angularjs Ecosystem Hub</h1>
+        <p class="lead">The next generation mobile first framework</p>
+      </div>
+    </main>
+
+    <div class="bs-docs-featurette">
+      <div class="container">
+        <h2 class="bs-docs-featurette-title">Born for large scale mobile/web app</h2>
+        <quote class="lead">Haxejs helps developers from all platforms build complex, high performance client apps for the modern web.</quote>
+        <hr class="half-rule">
+        <div class="row">
+          <div class="col-sm-6">
+            <h4>What is wrong with JavaScript?</h4>
+            <ol class="list-unstyled">
+              <li>Lack of structure</li>
+              <li>Very difficult to find dependencies</li>
+              <li>All numbers are floats</li>
+              <li>Monkey patching</li>
+              <li>Keep on truckin' mentality</li>
+              <li>Libraries are files you concatenate</li>
+            </ol>
+            <h4>... which makes it ...</h4>
+            <ol class="list-unstyled">
+              <li>Difficult to optimize performance</li>
+              <li>Difficult to maintain large code bases</li>
+              <li>Difficult to assert correctness</li>
+            </ol>
+          </div>
+          <div class="col-sm-6">
+            <img src="img/codesize.png" alt="large code base"/>
+          </div>
+        </div>
+
+        <hr class="half-rule">
+
+        <div class="row">
+          <div class="col-sm-4">
+            <h3>Object-oriented programming</h3>
+            <p>Use modern, high level, strictly typed programming language <a href="http://www.haxe.org">Haxe</a>(very similar to Java) to generate elegant javascript, it provides <strong>compiler error check</strong> and <strong>code completions</strong> with many IDE tools.</p>
+          </div>
+          <div class="col-sm-4">
+            <h3>Cut-edge library manager</h3>
+            <p>Hundreds of libraries are easy to put under your fingers, give you lots of choices.</p>
+          </div>
+          <div class="col-sm-4">
+            <h3>Powerful with angularjs, and other directives, services</h3>
+            <p><a href="http://angularjs.org">Angularjs</a> is elegant and well designed, and it is the core of haxejs framework, many good javascript libraries are rewritten in angularjs way, and integrated seamlessly.</p>
+          </div>
+        </div>
+
+        <hr class="half-rule">
+
+        <p class="lead">Haxejs is open source. It's hosted, developed, and maintained on GitHub.</p>
+        <a href="https://github.com/haxejs/haxejs-angular" class="btn btn-outline btn-lg">View the GitHub project</a>
+      </div>
+    </div>
+
+
+
+    <!-- Footer
+    ================================================== -->
+    <footer class="bs-docs-footer" role="contentinfo">
+      <div class="container">
+        <div class="bs-docs-social">
+          <ul class="bs-docs-social-buttons">
+            <li>
+              <iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=haxejs&amp;repo=haxejs-angular&amp;type=watch&amp;count=true" width="100" height="20" title="Star on GitHub"></iframe>
+            </li>
+            <li>
+              <iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=haxejs&amp;repo=haxejs-angular&amp;type=fork&amp;count=true" width="102" height="20" title="Fork on GitHub"></iframe>
+            </li>
+          </ul>
+        </div>
+
+
+        <p>Maintained by the <a href="https://github.com/haxejs?tab=members">core team</a> with the help of <a href="https://github.com/haxejs/haxejs-angular/graphs/contributors">our contributors</a>.</p>
+        <p>Code licensed under <a href="https://github.com/haxejs/haxejs-angular/blob/master/LICENSE" target="_blank">MIT</a>, documentation under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>
+        <ul class="bs-docs-footer-links muted">
+          <li><a href="https://github.com/haxejs/haxejs-angular">GitHub</a></li>
+          <li>&middot;</li>
+          <li><a href="http://demo.haxejs.com">Demo</a></li>
+          <li>&middot;</li>
+          <li><a href="http://forum.haxejs.com">Forum</a></li>
+        </ul>
+      </div>
+    </footer>
 
     <!-- Include all compiled plugins (below), or include individual files as needed
-
-    <script src="js/app.bundle.js"></script>
+        <script src="js/app.embed.js"></script>
     --> 
+
+    <!-- Bootstrap js plugins if we use bootstrap components, however, it is not angular native style, 
+    please use haxejs-angular-bootstrap if IE9 and above support is prefered.
+        <script src="js/docs.min.js"></script>
+    --> 
+    <script src="bower_components/jquery/jquery.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
   </body>
 </html>
