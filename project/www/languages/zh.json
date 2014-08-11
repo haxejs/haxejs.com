@@ -1,0 +1,6 @@
+{
+'HEADLINE': 'Hey, 看看我的漂亮应用!',
+'INTRO_TEXT': '它还支持国际化!',
+'BUTTON_TEXT_EN': '英文',
+'BUTTON_TEXT_ZH': '中文'
+}
