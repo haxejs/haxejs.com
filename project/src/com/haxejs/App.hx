@@ -12,6 +12,11 @@ class App implements IConfigs
 		Controllers.main();
 	}
 
+	@:inject("$locationProvider")
+	public static var locationConfig:Dynamic = function(locationProvider:NgLocationProvider) {
+		locationProvider.html5Mode(false);
+	}
+
 	@:inject("$routeProvider")
 	public static var routeConfig:Dynamic = function(routeProvider:NgRouteProvider) {
 		routeProvider.when("/home",new RouteMapping().set_templateUrl('partials/home.html'));
