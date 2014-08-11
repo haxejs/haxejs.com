@@ -37,7 +37,17 @@ class App implements IConfigs
 			prefix: 'languages/',
 			suffix: '.json'
 		  });
-		  translateProvider.preferredLanguage('zh');
+		  //translateProvider.fallbackLanguage("en");
+		  //translateProvider.preferredLanguage('zh');
+
+		  //combine registerAvailableLanguageKeys and determinePreferredLanguage to determine by browser default locale
+		  translateProvider.registerAvailableLanguageKeys(["en","zh"],{
+		  	'en_US': 'en',
+    		'en_UK': 'en',
+    		'zh_CN': 'zh',
+    		'zh_TW': 'zh'
+		  	});
+		  translateProvider.determinePreferredLanguage();
 	}
 
 	//IE is the only major browser that caches XHR requests. An efficient way to avoid this poor behavior is to set an HTTP response header of Cache-Control to be no-cache for every request.
