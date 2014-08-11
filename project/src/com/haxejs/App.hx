@@ -10,6 +10,20 @@ class App implements IConfigs
 {
 	public static function main(){
 		Controllers.main();
+		//$rootScope can only be resolved in run here
+		var func:Dynamic = function(rootScope:NgRootScope){
+				rootScope["loading"] = true;
+				rootScope.on("$locationChangeStart",function(event,newUrl,oldUrl){
+					//trace("$locationChangeStart");
+					rootScope["loading"] = true;
+				});
+				rootScope.on("$locationChangeSuccess",function(event,newUrl,oldUrl){
+					//trace("$locationChangeSuccess");
+					rootScope["loading"] = false;
+				});
+			};
+		untyped func["$inject"] = ["$rootScope"];
+		Angular.module('com.haxejs').run(func);
 	}
 
 	@:inject("$locationProvider")
