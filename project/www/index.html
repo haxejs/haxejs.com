@@ -26,6 +26,7 @@
     <!-- To make AngularJS work with IE7 and earlier, we need to polyfill JSON.stringify. -->
     <!--[if lt IE 9]>
       <script src="bower_components/json3/lib/json3.min.js"></script>
+	  <script src="bower_components/es5-shim/es5-shim.min.js"></script>
     <![endif]-->
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -48,8 +49,10 @@
     <![endif]-->
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<!--[if IE 10]>
     <script src="js/ie10-viewport-bug-workaround.js"></script>
     <script src="js/ie-emulation-modes-warning.js"></script>
+	<![endif]-->
 
     <!-- Favicons -->
     <link rel="apple-touch-icon-precomposed" href="apple-touch-icon-precomposed.png">
