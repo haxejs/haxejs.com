@@ -54,6 +54,20 @@
     <script src="js/ie-emulation-modes-warning.js"></script>
 	<![endif]-->
 
+    <!--[if lt IE 8]>
+      <script type="text/javascript"> 
+        var $buoop = {vs:{i:7},reminder:0,text:"本站不支持IE7与以下版本的浏览器，请<a href='http://www.browser-update.org/zh/update.html'>升级IE</a>,或使用Chrome/Safari/Firebox等其他浏览器.",text_en:"This site does not support IE8(and below), please <a href='http://www.browser-update.org/en/update.html'>upgrade IE</a>, or use Chrome/Safari/Firebox instead."}; 
+        $buoop.ol = window.onload; 
+        window.onload=function(){
+           try {if ($buoop.ol) $buoop.ol();}catch (e) {} 
+           var e = document.createElement("script"); 
+           e.setAttribute("type", "text/javascript"); 
+           e.setAttribute("src", "//browser-update.org/update.js"); 
+           document.body.appendChild(e); 
+        } 
+      </script> 
+    <![endif]-->
+	
     <!-- Favicons -->
     <link rel="apple-touch-icon-precomposed" href="apple-touch-icon-precomposed.png">
     <link rel="icon" href="favicon.ico">
@@ -79,7 +93,7 @@
 
           <ul class="nav navbar-nav">
             <li>
-              <a href="#/getstarted" translate>GETSTARTED_TITLE</a>
+              <a href="#/getstarted" translate="GETSTARTED_TITLE"></a>
             </li>
           </ul>
         <!--

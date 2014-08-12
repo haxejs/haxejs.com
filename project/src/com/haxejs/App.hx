@@ -75,4 +75,10 @@ class App implements IConfigs
 	public static var ieAjaxConfig:Dynamic = function(httpProvider:NgHttpProvider){
 		untyped httpProvider.defaults.headers.common["Cache-Control"] = 'no-cache';
 	}
+	
+	//The minimum bar for $sce is IE8 in standards mode. IE7 standards mode is not supported. If you must support IE7, you should disable $sce completely.
+	//@:inject("$sceProvider")
+	//public static var sceConfig:Dynamic = function(sceProvider:NgSceProvider){
+	//	sceProvider.enabled(false);
+	//}
 }
