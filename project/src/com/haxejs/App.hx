@@ -77,6 +77,7 @@ class App implements IConfigs
 	}
 	
 	//The minimum bar for $sce is IE8 in standards mode. IE7 standards mode is not supported. If you must support IE7, you should disable $sce completely.
+	//angular-translate can not work well somewhere if we disable $sce, we can only support IE8 and above
 	//@:inject("$sceProvider")
 	//public static var sceConfig:Dynamic = function(sceProvider:NgSceProvider){
 	//	sceProvider.enabled(false);
