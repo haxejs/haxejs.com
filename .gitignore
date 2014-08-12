@@ -1,6 +1,6 @@
 logs/*
 !.gitkeep
-node_modules/
+project/node_modules/
 project/test/unit
 project/test/e2e
 project/www/bower_components/
