@@ -2,12 +2,14 @@
 -js www/js/app.js
 -main com.haxejs.App
 -lib haxejs-angular
+-lib haxejs-angular-bootstrap
 
 --next
 -cp src
 -js www/js/app.embed.js
 -main com.haxejs.App
 -lib haxejs-angular
+-lib haxejs-angular-bootstrap
 -D embed_js
 -cmd "cp -R www/*  ../"
 
@@ -16,5 +18,6 @@
 -js test/unit/unitSpec.bundle.js
 -main Unit
 -lib haxejs-angular
+-lib haxejs-angular-bootstrap
 -D embed_js
 
