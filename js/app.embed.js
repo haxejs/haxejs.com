@@ -1,5 +1,23 @@
 (function () { "use strict";
+function $extend(from, fields) {
+	function Inherit() {} Inherit.prototype = from; var proto = new Inherit();
+	for (var name in fields) proto[name] = fields[name];
+	if( fields.toString !== Object.prototype.toString ) proto.toString = fields.toString;
+	return proto;
+}
+var HxOverrides = function() { };
+HxOverrides.__name__ = ["HxOverrides"];
+HxOverrides.substr = function(s,pos,len) {
+	if(pos != null && pos != 0 && len != null && len < 0) return "";
+	if(len == null) len = s.length;
+	if(pos < 0) {
+		pos = s.length + pos;
+		if(pos < 0) pos = 0;
+	} else if(len < 0) len = s.length + len - pos;
+	return s.substr(pos,len);
+};
 var Reflect = function() { };
+Reflect.__name__ = ["Reflect"];
 Reflect.field = function(o,field) {
 	try {
 		return o[field];
@@ -7,11 +25,23 @@ Reflect.field = function(o,field) {
 		return null;
 	}
 };
+var Type = function() { };
+Type.__name__ = ["Type"];
+Type.getClass = function(o) {
+	if(o == null) return null;
+	if((o instanceof Array) && o.__enum__ == null) return Array; else return o.__class__;
+};
+Type.getClassName = function(c) {
+	var a = c.__name__;
+	return a.join(".");
+};
 var ng = {};
 ng.IConfigs = function() { };
+ng.IConfigs.__name__ = ["ng","IConfigs"];
 var com = {};
 com.haxejs = {};
 com.haxejs.App = function() { };
+com.haxejs.App.__name__ = ["com","haxejs","App"];
 com.haxejs.App.__interfaces__ = [ng.IConfigs];
 com.haxejs.App.main = function() {
 	try {
@@ -22,24 +52,88 @@ com.haxejs.App.main = function() {
 		ng.Angular.module("com.haxejs",deps);
 	}
 	com.haxejs.App.ieAjaxConfig.$inject = ["$httpProvider"];
-	com.haxejs.App.runConfig.$inject = ["$routeProvider"];
-	ng.Angular.module("com.haxejs").config(com.haxejs.App.runConfig);
+	com.haxejs.App.translateConfig.$inject = ["$translateProvider"];
+	com.haxejs.App.routeConfig.$inject = ["$routeProvider"];
+	com.haxejs.App.locationConfig.$inject = ["$locationProvider"];
+	com.haxejs.Controllers.main();
+	var func = function(rootScope) {
+		rootScope.loading = true;
+		rootScope.$on("$locationChangeStart",function(event,newUrl,oldUrl) {
+			rootScope.loading = true;
+		});
+		rootScope.$on("$locationChangeSuccess",function(event1,newUrl1,oldUrl1) {
+			rootScope.loading = false;
+		});
+	};
+	func.$inject = ["$rootScope"];
+	ng.Angular.module("com.haxejs").run(func);
+	ng.Angular.module("com.haxejs").config(com.haxejs.App.locationConfig);
+	ng.Angular.module("com.haxejs").config(com.haxejs.App.routeConfig);
+	ng.Angular.module("com.haxejs").config(com.haxejs.App.translateConfig);
 	ng.Angular.module("com.haxejs").config(com.haxejs.App.ieAjaxConfig);
 };
-com.haxejs.App.runConfig = function(routeProvider) {
+com.haxejs.App.locationConfig = function(locationProvider) {
+	locationProvider.html5Mode(false);
+};
+com.haxejs.App.routeConfig = function(routeProvider) {
 	routeProvider.when("/home",new ng.RouteMapping().set_templateUrl("partials/home.html"));
 	routeProvider.when("/getstarted",new ng.RouteMapping().set_templateUrl("partials/getstarted.html"));
 	routeProvider.otherwise(new ng.RouteMapping().set_redirectTo("/home"));
 };
+com.haxejs.App.translateConfig = function(translateProvider) {
+	translateProvider.useStaticFilesLoader({ prefix : "languages/", suffix : ".json"});
+	translateProvider.registerAvailableLanguageKeys(["en","zh"],{ en_US : "en", en_UK : "en", zh_CN : "zh", zh_TW : "zh"});
+	translateProvider.determinePreferredLanguage();
+};
 com.haxejs.App.ieAjaxConfig = function(httpProvider) {
 	httpProvider.defaults.headers.common["Cache-Control"] = "no-cache";
 };
+ng.IControllers = function() { };
+ng.IControllers.__name__ = ["ng","IControllers"];
+ng.BaseCtrl = function(scope) {
+	var className = Type.getClassName(Type.getClass(this));
+	var pos = className.lastIndexOf(".");
+	className = className.charAt(pos + 1).toLowerCase() + HxOverrides.substr(className,pos + 2,null);
+	scope[className] = this;
+};
+ng.BaseCtrl.__name__ = ["ng","BaseCtrl"];
+ng.BaseCtrl.prototype = {
+	__class__: ng.BaseCtrl
+};
+com.haxejs.SwitchLangCtrl = function(scope,translate) {
+	ng.BaseCtrl.call(this,scope);
+	this.translate = translate;
+};
+com.haxejs.SwitchLangCtrl.__name__ = ["com","haxejs","SwitchLangCtrl"];
+com.haxejs.SwitchLangCtrl.__super__ = ng.BaseCtrl;
+com.haxejs.SwitchLangCtrl.prototype = $extend(ng.BaseCtrl.prototype,{
+	changeLanguage: function(langKey) {
+		this.translate["use"](langKey);
+	}
+	,__class__: com.haxejs.SwitchLangCtrl
+});
+com.haxejs.Controllers = function() { };
+com.haxejs.Controllers.__name__ = ["com","haxejs","Controllers"];
+com.haxejs.Controllers.__interfaces__ = [ng.IControllers];
+com.haxejs.Controllers.main = function() {
+	try {
+		ng.Angular.module("com.haxejs");
+	} catch( e ) {
+		var deps;
+		if(window.hxdeps) deps = window.hxdeps; else deps = [];
+		ng.Angular.module("com.haxejs",deps);
+	}
+	com.haxejs.Controllers.switchLangCtrl.$inject = ["$scope","$translate"];
+	ng.Angular.module("com.haxejs").controller("switchLangCtrl",com.haxejs.Controllers.switchLangCtrl);
+};
 ng._Angular = {};
 ng._Angular.NgAnchorScroll_Impl_ = function() { };
+ng._Angular.NgAnchorScroll_Impl_.__name__ = ["ng","_Angular","NgAnchorScroll_Impl_"];
 ng._Angular.NgAnchorScroll_Impl_.run = function(this1) {
 	this1();
 };
 ng._Angular.NgScope_Impl_ = function() { };
+ng._Angular.NgScope_Impl_.__name__ = ["ng","_Angular","NgScope_Impl_"];
 ng._Angular.NgScope_Impl_.arrayAccess = function(this1,key) {
 	return Reflect.field(this1,key);
 };
@@ -87,6 +181,7 @@ ng._Angular.NgScope_Impl_.broadcast = function(this1,name,args) {
 	return this1.$broadcast(name,args);
 };
 ng._Angular.NgHttp_Impl_ = function() { };
+ng._Angular.NgHttp_Impl_.__name__ = ["ng","_Angular","NgHttp_Impl_"];
 ng._Angular.NgHttp_Impl_.run = function(this1,requestConfig) {
 	return this1(requestConfig);
 };
@@ -112,6 +207,7 @@ ng._Angular.NgHttp_Impl_.defaults = function(this1) {
 	return this1.defaults;
 };
 ng._Angular.NgCompile_Impl_ = function() { };
+ng._Angular.NgCompile_Impl_.__name__ = ["ng","_Angular","NgCompile_Impl_"];
 ng._Angular.NgCompile_Impl_.runJ = function(this1,element) {
 	return this1(element);
 };
@@ -119,6 +215,7 @@ ng._Angular.NgCompile_Impl_.run = function(this1,element) {
 	return this1(element);
 };
 ng._Angular.NgCacheFactory_Impl_ = function() { };
+ng._Angular.NgCacheFactory_Impl_.__name__ = ["ng","_Angular","NgCacheFactory_Impl_"];
 ng._Angular.NgCacheFactory_Impl_.newCache = function(this1,cacheId,options) {
 	return this1(cacheId,options);
 };
@@ -129,10 +226,12 @@ ng._Angular.NgCacheFactory_Impl_.get = function(this1,cacheId) {
 	return this1.get(cacheId);
 };
 ng._Angular.NgExceptionHandler_Impl_ = function() { };
+ng._Angular.NgExceptionHandler_Impl_.__name__ = ["ng","_Angular","NgExceptionHandler_Impl_"];
 ng._Angular.NgExceptionHandler_Impl_.run = function(this1,exception,cause) {
 	this1(exception,cause);
 };
 ng._Angular.NgInterpolate_Impl_ = function() { };
+ng._Angular.NgInterpolate_Impl_.__name__ = ["ng","_Angular","NgInterpolate_Impl_"];
 ng._Angular.NgInterpolate_Impl_.run = function(this1,text,mustHaveExpression,trustedContext) {
 	return this1(text,mustHaveExpression,trustedContext);
 };
@@ -143,6 +242,7 @@ ng._Angular.NgInterpolate_Impl_.endSymbol = function(this1) {
 	return this1.endSymbol();
 };
 ng._Angular.NgInterval_Impl_ = function() { };
+ng._Angular.NgInterval_Impl_.__name__ = ["ng","_Angular","NgInterval_Impl_"];
 ng._Angular.NgInterval_Impl_.run = function(this1,fn,delay,count,invokeApply) {
 	if(invokeApply == null) invokeApply = true;
 	if(count == null) count = 0;
@@ -155,6 +255,7 @@ ng._Angular.NgInterval_Impl_.flush = function(this1,millis) {
 	this1.flush(millis);
 };
 ng._Angular.NgExprFn_Impl_ = function() { };
+ng._Angular.NgExprFn_Impl_.__name__ = ["ng","_Angular","NgExprFn_Impl_"];
 ng._Angular.NgExprFn_Impl_.run = function(this1,context,locals) {
 	return this1(context,locals);
 };
@@ -168,10 +269,12 @@ ng._Angular.NgExprFn_Impl_.assign = function(this1) {
 	return this1.assign;
 };
 ng._Angular.NgParse_Impl_ = function() { };
+ng._Angular.NgParse_Impl_.__name__ = ["ng","_Angular","NgParse_Impl_"];
 ng._Angular.NgParse_Impl_.run = function(this1,expression) {
 	return this1(expression);
 };
 ng._Angular.NgTimeout_Impl_ = function() { };
+ng._Angular.NgTimeout_Impl_.__name__ = ["ng","_Angular","NgTimeout_Impl_"];
 ng._Angular.NgTimeout_Impl_.run = function(this1,fn,delay,invokeApply) {
 	if(invokeApply == null) invokeApply = true;
 	return this1(fn,delay,invokeApply);
@@ -183,6 +286,7 @@ ng._Angular.NgTimeout_Impl_.flush = function(this1,millis) {
 	return this1.flush(millis);
 };
 ng._Angular.NgController_Impl_ = function() { };
+ng._Angular.NgController_Impl_.__name__ = ["ng","_Angular","NgController_Impl_"];
 ng._Angular.NgController_Impl_.run = function(this1,expression,locals) {
 	if(locals != null && ng.Angular.isUndefined(locals.$scope)) {
 		locals.$scope = { };
@@ -192,6 +296,7 @@ ng._Angular.NgController_Impl_.run = function(this1,expression,locals) {
 };
 ng.NgDirectiveDefinition = function() {
 };
+ng.NgDirectiveDefinition.__name__ = ["ng","NgDirectiveDefinition"];
 ng.NgDirectiveDefinition.prototype = {
 	set_priority: function(val) {
 		this.priority = val;
@@ -277,8 +382,10 @@ ng.NgDirectiveDefinition.prototype = {
 	,get_link: function() {
 		return this.link;
 	}
+	,__class__: ng.NgDirectiveDefinition
 };
 ng._Angular.NgAttributes_Impl_ = function() { };
+ng._Angular.NgAttributes_Impl_.__name__ = ["ng","_Angular","NgAttributes_Impl_"];
 ng._Angular.NgAttributes_Impl_.get = function(this1,attr) {
 	return this1[attr];
 };
@@ -289,6 +396,7 @@ ng._Angular.NgAttributes_Impl_.observe = function(this1,attr,fn) {
 	this1.$observe(attr,fn);
 };
 ng._Angular.NgFormController_Impl_ = function() { };
+ng._Angular.NgFormController_Impl_.__name__ = ["ng","_Angular","NgFormController_Impl_"];
 ng._Angular.NgFormController_Impl_.get_pristine = function(this1) {
 	return this1.$pristine;
 };
@@ -317,11 +425,13 @@ ng._Angular.NgFormController_Impl_.get_error = function(this1) {
 	return this1.$error;
 };
 ng._Angular.NgFilter_Impl_ = function() { };
+ng._Angular.NgFilter_Impl_.__name__ = ["ng","_Angular","NgFilter_Impl_"];
 ng._Angular.NgFilter_Impl_.run = function(this1,name) {
 	return this1(name);
 };
 ng.RouteMapping = function() {
 };
+ng.RouteMapping.__name__ = ["ng","RouteMapping"];
 ng.RouteMapping.prototype = {
 	set_controller: function(val) {
 		this.controller = val;
@@ -379,7 +489,11 @@ ng.RouteMapping.prototype = {
 	,get_caseInsensitiveMatch: function() {
 		return this.caseInsensitiveMatch;
 	}
+	,__class__: ng.RouteMapping
 };
+String.prototype.__class__ = String;
+String.__name__ = ["String"];
+Array.__name__ = ["Array"];
 /*
  AngularJS v1.2.12
  (c) 2010-2014 Google, Inc. http://angularjs.org
@@ -609,5 +723,26 @@ function(){this.$get=function(){return{}}});h.directive("ngView",u);h.directive(
 ;
 if(ng.Angular.isUndefined(window.hxdeps)) window.hxdeps = [];
 window.hxdeps.push("ngRoute");
+/*!
+ * angular-translate - v2.2.0 - 2014-06-03
+ * http://github.com/PascalPrecht/angular-translate
+ * Copyright (c) 2014 ; Licensed MIT
+ */
+angular.module("pascalprecht.translate",["ng"]).run(["$translate",function(a){var b=a.storageKey(),c=a.storage();c?c.get(b)?a.use(c.get(b)):angular.isString(a.preferredLanguage())?a.use(a.preferredLanguage()):c.set(b,a.use()):angular.isString(a.preferredLanguage())&&a.use(a.preferredLanguage())}]),angular.module("pascalprecht.translate").provider("$translate",["$STORAGE_KEY",function(a){var b,c,d,e,f,g,h,i,j,k,l,m,n,o,p={},q=[],r=a,s=[],t=!1,u="translate-cloak",v=!1,w=".",x=function(){var a=window.navigator;return(a.language||a.browserLanguage||a.systemLanguage||a.userLanguage||"").split("-").join("_")},y=function(a){for(var b=[],d=angular.lowercase(a),e=0,f=q.length;f>e;e++)b.push(angular.lowercase(q[e]));if(b.indexOf(d)>-1)return a;if(c){var g;for(var h in c){var i=!1,j=c.hasOwnProperty(h)&&angular.lowercase(h)===angular.lowercase(a);if("*"===h.slice(-1)&&(i=h.slice(0,-1)===a.slice(0,h.length-1)),(j||i)&&(g=c[h],b.indexOf(angular.lowercase(g))>-1))return g}}var k=a.split("_");return k.length>1&&b.indexOf(angular.lowercase(k[0]))>-1?k[0]:a},z=function(a,b){if(!a&&!b)return p;if(a&&!b){if(angular.isString(a))return p[a]}else angular.isObject(p[a])||(p[a]={}),angular.extend(p[a],A(b));return this};this.translations=z,this.cloakClassName=function(a){return a?(u=a,this):u};var A=function(a,b,c,d){var e,f,g,h;b||(b=[]),c||(c={});for(e in a)a.hasOwnProperty(e)&&(h=a[e],angular.isObject(h)?A(h,b.concat(e),c,e):(f=b.length?""+b.join(w)+w+e:e,b.length&&e===d&&(g=""+b.join(w),c[g]="@:"+f),c[f]=h));return c};this.addInterpolation=function(a){return s.push(a),this},this.useMessageFormatInterpolation=function(){return this.useInterpolation("$translateMessageFormatInterpolation")},this.useInterpolation=function(a){return k=a,this},this.useSanitizeValueStrategy=function(a){return t=a,this},this.preferredLanguage=function(a){return a?(b=a,this):b},this.translationNotFoundIndicator=function(a){return this.translationNotFoundIndicatorLeft(a),this.translationNotFoundIndicatorRight(a),this},this.translationNotFoundIndicatorLeft=function(a){return a?(n=a,this):n},this.translationNotFoundIndicatorRight=function(a){return a?(o=a,this):o},this.fallbackLanguage=function(a){return B(a),this};var B=function(a){return a?(angular.isString(a)?(e=!0,d=[a]):angular.isArray(a)&&(e=!1,d=a),angular.isString(b)&&d.push(b),this):e?d[0]:d};this.use=function(a){if(a){if(!p[a]&&!l)throw new Error("$translateProvider couldn't find translationTable for langKey: '"+a+"'");return f=a,this}return f};var C=function(a){return a?(r=a,void 0):i?i+r:r};this.storageKey=C,this.useUrlLoader=function(a){return this.useLoader("$translateUrlLoader",{url:a})},this.useStaticFilesLoader=function(a){return this.useLoader("$translateStaticFilesLoader",a)},this.useLoader=function(a,b){return l=a,m=b||{},this},this.useLocalStorage=function(){return this.useStorage("$translateLocalStorage")},this.useCookieStorage=function(){return this.useStorage("$translateCookieStorage")},this.useStorage=function(a){return h=a,this},this.storagePrefix=function(a){return a?(i=a,this):a},this.useMissingTranslationHandlerLog=function(){return this.useMissingTranslationHandler("$translateMissingTranslationHandlerLog")},this.useMissingTranslationHandler=function(a){return j=a,this},this.usePostCompiling=function(a){return v=!!a,this},this.determinePreferredLanguage=function(a){var c=a&&angular.isFunction(a)?a():x();return b=q.length?y(c):c,this},this.registerAvailableLanguageKeys=function(a,b){return a?(q=a,b&&(c=b),this):q},this.$get=["$log","$injector","$rootScope","$q",function(a,c,i,q){var w,x,D,E=c.get(k||"$translateDefaultInterpolation"),F=!1,G={},H={},I=function(a,c,e){if(angular.isArray(a)){var g=function(a){for(var b={},d=[],f=function(a){var d=q.defer(),f=function(c){b[a]=c,d.resolve([a,c])};return I(a,c,e).then(f,f),d.promise},g=0,h=a.length;h>g;g++)d.push(f(a[g]));return q.all(d).then(function(){return b})};return g(a)}var i=q.defer();a&&(a=a.trim());var j=function(){var a=b?H[b]:H[f];if(x=0,h&&!a){var c=w.get(r);if(a=H[c],d&&d.length){var e=J(d,c);x=e>-1?e+=1:0,d.push(b)}}return a}();return j?j.then(function(){U(a,c,e).then(i.resolve,i.reject)},i.reject):U(a,c,e).then(i.resolve,i.reject),i.promise},J=function(a,b){for(var c=0,d=a.length;d>c;c++)if(a[c]===b)return c;return-1},K=function(a){return n&&(a=[n,a].join(" ")),o&&(a=[a,o].join(" ")),a},L=function(a){f=a,i.$emit("$translateChangeSuccess"),h&&w.set(I.storageKey(),f),E.setLocale(f),angular.forEach(G,function(a,b){G[b].setLocale(f)}),i.$emit("$translateChangeEnd")},M=function(a){if(!a)throw"No language key specified for loading.";var b=q.defer();return i.$emit("$translateLoadingStart"),F=!0,c.get(l)(angular.extend(m,{key:a})).then(function(c){var d={};i.$emit("$translateLoadingSuccess"),angular.isArray(c)?angular.forEach(c,function(a){angular.extend(d,A(a))}):angular.extend(d,A(c)),F=!1,b.resolve({key:a,table:d}),i.$emit("$translateLoadingEnd")},function(a){i.$emit("$translateLoadingError"),b.reject(a),i.$emit("$translateLoadingEnd")}),b.promise};if(h&&(w=c.get(h),!w.get||!w.set))throw new Error("Couldn't use storage '"+h+"', missing get() or set() method!");angular.isFunction(E.useSanitizeValueStrategy)&&E.useSanitizeValueStrategy(t),s.length&&angular.forEach(s,function(a){var d=c.get(a);d.setLocale(b||f),angular.isFunction(d.useSanitizeValueStrategy)&&d.useSanitizeValueStrategy(t),G[d.getInterpolationIdentifier()]=d});var N=function(a){var b=q.defer();return p.hasOwnProperty(a)?(b.resolve(p[a]),b.promise):(H[a].then(function(a){z(a.key,a.table),b.resolve(a.table)},b.reject),b.promise)},O=function(a,b,c,d){var e=q.defer();return N(a).then(function(g){g.hasOwnProperty(b)?(d.setLocale(a),e.resolve(d.interpolate(g[b],c)),d.setLocale(f)):e.reject()},e.reject),e.promise},P=function(a,b,c,d){var e,g=p[a];return g.hasOwnProperty(b)&&(d.setLocale(a),e=d.interpolate(g[b],c),d.setLocale(f)),e},Q=function(a,b,e,g){var h=q.defer();if(a<d.length){var i=d[a];O(i,b,e,g).then(function(a){h.resolve(a)},function(){var c=Q(a+1,b,e,g);h.resolve(c)})}else if(j){var k=c.get(j)(b,f);void 0!==k?h.resolve(k):h.resolve(b)}else h.resolve(b);return h.promise},R=function(a,b,c,e){var f;if(a<d.length){var g=d[a];f=P(g,b,c,e),f||(f=R(a+1,b,c,e))}return f},S=function(a,b,c){return Q(D>0?D:x,a,b,c)},T=function(a,b,c){return R(D>0?D:x,a,b,c)},U=function(a,b,e){var g=q.defer(),h=f?p[f]:p,i=e?G[e]:E;if(h&&h.hasOwnProperty(a)){var k=h[a];"@:"===k.substr(0,2)?I(k.substr(2),b,e).then(g.resolve,g.reject):g.resolve(i.interpolate(k,b))}else j&&!F&&c.get(j)(a,f),f&&d&&d.length?S(a,b,i).then(function(a){g.resolve(a)},function(a){g.reject(K(a))}):g.reject(K(a));return g.promise},V=function(a,b,e){var g,h=f?p[f]:p,i=e?G[e]:E;if(h&&h.hasOwnProperty(a)){var k=h[a];g="@:"===k.substr(0,2)?V(k.substr(2),b,e):i.interpolate(k,b)}else j&&!F&&c.get(j)(a,f),f&&d&&d.length?(x=0,g=T(a,b,i)):g=K(a);return g};if(I.preferredLanguage=function(){return b},I.cloakClassName=function(){return u},I.fallbackLanguage=function(a){if(void 0!==a&&null!==a){if(B(a),l&&d&&d.length)for(var b=0,c=d.length;c>b;b++)H[d[b]]||(H[d[b]]=M(d[b]));I.use(I.use())}return e?d[0]:d},I.useFallbackLanguage=function(a){if(void 0!==a&&null!==a)if(a){var b=J(d,a);b>-1&&(D=b)}else D=0},I.proposedLanguage=function(){return g},I.storage=function(){return w},I.use=function(a){if(!a)return f;var b=q.defer();i.$emit("$translateChangeStart");var c=y(a);return c&&(a=c),!p[a]&&l?(g=a,H[a]=M(a).then(function(c){z(c.key,c.table),b.resolve(c.key),g===a&&(L(c.key),g=void 0)},function(a){g=void 0,i.$emit("$translateChangeError"),b.reject(a),i.$emit("$translateChangeEnd")})):(b.resolve(a),L(a)),b.promise},I.storageKey=function(){return C()},I.isPostCompilingEnabled=function(){return v},I.refresh=function(a){function b(){e.resolve(),i.$emit("$translateRefreshEnd")}function c(){e.reject(),i.$emit("$translateRefreshEnd")}if(!l)throw new Error("Couldn't refresh translation table, no loader registered!");var e=q.defer();if(i.$emit("$translateRefreshStart"),a)p[a]?M(a).then(function(c){z(c.key,c.table),a===f&&L(f),b()},c):c();else{var g=[];if(d&&d.length)for(var h=0,j=d.length;j>h;h++)g.push(M(d[h]));f&&g.push(M(f)),q.all(g).then(function(a){angular.forEach(a,function(a){p[a.key]&&delete p[a.key],z(a.key,a.table)}),f&&L(f),b()})}return e.promise},I.instant=function(a,e,g){if(null===a||angular.isUndefined(a))return a;if(angular.isArray(a)){for(var h={},i=0,k=a.length;k>i;i++)h[a[i]]=I.instant(a[i],e,g);return h}if(angular.isString(a)&&a.length<1)return a;a&&(a=a.trim());var l,m=[];b&&m.push(b),f&&m.push(f),d&&d.length&&(m=m.concat(d));for(var n=0,o=m.length;o>n;n++){var q=m[n];if(p[q]&&"undefined"!=typeof p[q][a]&&(l=V(a,e,g)),"undefined"!=typeof l)break}return l||""===l||(l=a,j&&!F&&c.get(j)(a,f)),l},l&&(angular.equals(p,{})&&I.use(I.use()),d&&d.length))for(var W=0,X=d.length;X>W;W++)H[d[W]]=M(d[W]);return I}]}]),angular.module("pascalprecht.translate").factory("$translateDefaultInterpolation",["$interpolate",function(a){var b,c={},d="default",e=null,f={escaped:function(a){var b={};for(var c in a)a.hasOwnProperty(c)&&(b[c]=angular.element("<div></div>").text(a[c]).html());return b}},g=function(a){var b;return b=angular.isFunction(f[e])?f[e](a):a};return c.setLocale=function(a){b=a},c.getInterpolationIdentifier=function(){return d},c.useSanitizeValueStrategy=function(a){return e=a,this},c.interpolate=function(b,c){return e&&(c=g(c)),a(b)(c||{})},c}]),angular.module("pascalprecht.translate").constant("$STORAGE_KEY","NG_TRANSLATE_LANG_KEY"),angular.module("pascalprecht.translate").directive("translate",["$translate","$q","$interpolate","$compile","$parse","$rootScope",function(a,b,c,d,e,f){return{restrict:"AE",scope:!0,compile:function(b,g){var h=g.translateValues?g.translateValues:void 0,i=g.translateInterpolation?g.translateInterpolation:void 0,j=b[0].outerHTML.match(/translate-value-+/i);return function(b,k,l){if(b.interpolateParams={},l.$observe("translate",function(a){b.translationId=angular.equals(a,"")||!angular.isDefined(a)?c(k.text().replace(/^\s+|\s+$/g,""))(b.$parent):a}),l.$observe("translateDefault",function(a){b.defaultText=a}),h&&l.$observe("translateValues",function(a){a&&b.$parent.$watch(function(){angular.extend(b.interpolateParams,e(a)(b.$parent))})}),j){var m=function(a){l.$observe(a,function(c){b.interpolateParams[angular.lowercase(a.substr(14,1))+a.substr(15)]=c})};for(var n in l)l.hasOwnProperty(n)&&"translateValue"===n.substr(0,14)&&"translateValues"!==n&&m(n)}var o=function(b,c,e){e||"undefined"==typeof c.defaultText||(b=c.defaultText),k.html(b);var f=a.isPostCompilingEnabled(),h="undefined"!=typeof g.translateCompile,i=h&&"false"!==g.translateCompile;(f&&!h||i)&&d(k.contents())(c)},p=function(){return h||j?function(){var c=function(){b.translationId&&b.interpolateParams&&a(b.translationId,b.interpolateParams,i).then(function(a){o(a,b,!0)},function(a){o(a,b,!1)})};b.$watch("interpolateParams",c,!0),b.$watch("translationId",c)}:function(){var c=b.$watch("translationId",function(d){b.translationId&&d&&a(d,{},i).then(function(a){o(a,b,!0),c()},function(a){o(a,b,!1),c()})},!0)}}(),q=f.$on("$translateChangeSuccess",p);p(),b.$on("$destroy",q)}}}}]),angular.module("pascalprecht.translate").directive("translateCloak",["$rootScope","$translate",function(a,b){return{compile:function(c){a.$on("$translateLoadingSuccess",function(){c.removeClass(b.cloakClassName())}),c.addClass(b.cloakClassName())}}}]),angular.module("pascalprecht.translate").filter("translate",["$parse","$translate",function(a,b){return function(c,d,e){return angular.isObject(d)||(d=a(d)(this)),b.instant(c,d,e)}}]);;
+/*!
+ * angular-translate - v2.2.0 - 2014-06-03
+ * http://github.com/PascalPrecht/angular-translate
+ * Copyright (c) 2014 ; Licensed MIT
+ */
+angular.module("pascalprecht.translate").factory("$translateUrlLoader",["$q","$http",function(a,b){return function(c){if(!c||!c.url)throw new Error("Couldn't use urlLoader since no url is given!");var d=a.defer();return b({url:c.url,params:{lang:c.key},method:"GET"}).success(function(a){d.resolve(a)}).error(function(){d.reject(c.key)}),d.promise}}]);;
+/*!
+ * angular-translate - v2.2.0 - 2014-06-03
+ * http://github.com/PascalPrecht/angular-translate
+ * Copyright (c) 2014 ; Licensed MIT
+ */
+angular.module("pascalprecht.translate").factory("$translateStaticFilesLoader",["$q","$http",function(a,b){return function(c){if(!c||!angular.isString(c.prefix)||!angular.isString(c.suffix))throw new Error("Couldn't load static files, no prefix or suffix specified!");var d=a.defer();return b({url:[c.prefix,c.key,c.suffix].join(""),method:"GET",params:""}).success(function(a){d.resolve(a)}).error(function(){d.reject(c.key)}),d.promise}}]);;
+if(ng.Angular.isUndefined(window.hxdeps)) window.hxdeps = [];
+window.hxdeps.push("pascalprecht.translate");
+com.haxejs.Controllers.switchLangCtrl = com.haxejs.SwitchLangCtrl;
 com.haxejs.App.main();
 })();

@@ -76,7 +76,7 @@
 
           <ul class="nav navbar-nav">
             <li>
-              <a href="#/getstarted">Get started</a>
+              <a href="#/getstarted" translate>GETSTARTED_TITLE</a>
             </li>
           </ul>
         <!--
@@ -94,7 +94,8 @@
     </header>
 
     <div ng-view></div>
-
+    <!--$rootScope.loading is changed on location change events-->
+    <div ng-show="loading" class="container"><h1>loading...</h1></div>
     <!-- Footer
     ================================================== -->
     <footer class="bs-docs-footer" role="contentinfo">

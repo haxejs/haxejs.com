@@ -1,5 +1,23 @@
 (function () { "use strict";
+function $extend(from, fields) {
+	function Inherit() {} Inherit.prototype = from; var proto = new Inherit();
+	for (var name in fields) proto[name] = fields[name];
+	if( fields.toString !== Object.prototype.toString ) proto.toString = fields.toString;
+	return proto;
+}
+var HxOverrides = function() { };
+HxOverrides.__name__ = ["HxOverrides"];
+HxOverrides.substr = function(s,pos,len) {
+	if(pos != null && pos != 0 && len != null && len < 0) return "";
+	if(len == null) len = s.length;
+	if(pos < 0) {
+		pos = s.length + pos;
+		if(pos < 0) pos = 0;
+	} else if(len < 0) len = s.length + len - pos;
+	return s.substr(pos,len);
+};
 var Reflect = function() { };
+Reflect.__name__ = ["Reflect"];
 Reflect.field = function(o,field) {
 	try {
 		return o[field];
@@ -7,11 +25,23 @@ Reflect.field = function(o,field) {
 		return null;
 	}
 };
+var Type = function() { };
+Type.__name__ = ["Type"];
+Type.getClass = function(o) {
+	if(o == null) return null;
+	if((o instanceof Array) && o.__enum__ == null) return Array; else return o.__class__;
+};
+Type.getClassName = function(c) {
+	var a = c.__name__;
+	return a.join(".");
+};
 var ng = {};
 ng.IConfigs = function() { };
+ng.IConfigs.__name__ = ["ng","IConfigs"];
 var com = {};
 com.haxejs = {};
 com.haxejs.App = function() { };
+com.haxejs.App.__name__ = ["com","haxejs","App"];
 com.haxejs.App.__interfaces__ = [ng.IConfigs];
 com.haxejs.App.main = function() {
 	try {
@@ -22,24 +52,88 @@ com.haxejs.App.main = function() {
 		ng.Angular.module("com.haxejs",deps);
 	}
 	com.haxejs.App.ieAjaxConfig.$inject = ["$httpProvider"];
-	com.haxejs.App.runConfig.$inject = ["$routeProvider"];
-	ng.Angular.module("com.haxejs").config(com.haxejs.App.runConfig);
+	com.haxejs.App.translateConfig.$inject = ["$translateProvider"];
+	com.haxejs.App.routeConfig.$inject = ["$routeProvider"];
+	com.haxejs.App.locationConfig.$inject = ["$locationProvider"];
+	com.haxejs.Controllers.main();
+	var func = function(rootScope) {
+		rootScope.loading = true;
+		rootScope.$on("$locationChangeStart",function(event,newUrl,oldUrl) {
+			rootScope.loading = true;
+		});
+		rootScope.$on("$locationChangeSuccess",function(event1,newUrl1,oldUrl1) {
+			rootScope.loading = false;
+		});
+	};
+	func.$inject = ["$rootScope"];
+	ng.Angular.module("com.haxejs").run(func);
+	ng.Angular.module("com.haxejs").config(com.haxejs.App.locationConfig);
+	ng.Angular.module("com.haxejs").config(com.haxejs.App.routeConfig);
+	ng.Angular.module("com.haxejs").config(com.haxejs.App.translateConfig);
 	ng.Angular.module("com.haxejs").config(com.haxejs.App.ieAjaxConfig);
 };
-com.haxejs.App.runConfig = function(routeProvider) {
+com.haxejs.App.locationConfig = function(locationProvider) {
+	locationProvider.html5Mode(false);
+};
+com.haxejs.App.routeConfig = function(routeProvider) {
 	routeProvider.when("/home",new ng.RouteMapping().set_templateUrl("partials/home.html"));
 	routeProvider.when("/getstarted",new ng.RouteMapping().set_templateUrl("partials/getstarted.html"));
 	routeProvider.otherwise(new ng.RouteMapping().set_redirectTo("/home"));
 };
+com.haxejs.App.translateConfig = function(translateProvider) {
+	translateProvider.useStaticFilesLoader({ prefix : "languages/", suffix : ".json"});
+	translateProvider.registerAvailableLanguageKeys(["en","zh"],{ en_US : "en", en_UK : "en", zh_CN : "zh", zh_TW : "zh"});
+	translateProvider.determinePreferredLanguage();
+};
 com.haxejs.App.ieAjaxConfig = function(httpProvider) {
 	httpProvider.defaults.headers.common["Cache-Control"] = "no-cache";
 };
+ng.IControllers = function() { };
+ng.IControllers.__name__ = ["ng","IControllers"];
+ng.BaseCtrl = function(scope) {
+	var className = Type.getClassName(Type.getClass(this));
+	var pos = className.lastIndexOf(".");
+	className = className.charAt(pos + 1).toLowerCase() + HxOverrides.substr(className,pos + 2,null);
+	scope[className] = this;
+};
+ng.BaseCtrl.__name__ = ["ng","BaseCtrl"];
+ng.BaseCtrl.prototype = {
+	__class__: ng.BaseCtrl
+};
+com.haxejs.SwitchLangCtrl = function(scope,translate) {
+	ng.BaseCtrl.call(this,scope);
+	this.translate = translate;
+};
+com.haxejs.SwitchLangCtrl.__name__ = ["com","haxejs","SwitchLangCtrl"];
+com.haxejs.SwitchLangCtrl.__super__ = ng.BaseCtrl;
+com.haxejs.SwitchLangCtrl.prototype = $extend(ng.BaseCtrl.prototype,{
+	changeLanguage: function(langKey) {
+		this.translate["use"](langKey);
+	}
+	,__class__: com.haxejs.SwitchLangCtrl
+});
+com.haxejs.Controllers = function() { };
+com.haxejs.Controllers.__name__ = ["com","haxejs","Controllers"];
+com.haxejs.Controllers.__interfaces__ = [ng.IControllers];
+com.haxejs.Controllers.main = function() {
+	try {
+		ng.Angular.module("com.haxejs");
+	} catch( e ) {
+		var deps;
+		if(window.hxdeps) deps = window.hxdeps; else deps = [];
+		ng.Angular.module("com.haxejs",deps);
+	}
+	com.haxejs.Controllers.switchLangCtrl.$inject = ["$scope","$translate"];
+	ng.Angular.module("com.haxejs").controller("switchLangCtrl",com.haxejs.Controllers.switchLangCtrl);
+};
 ng._Angular = {};
 ng._Angular.NgAnchorScroll_Impl_ = function() { };
+ng._Angular.NgAnchorScroll_Impl_.__name__ = ["ng","_Angular","NgAnchorScroll_Impl_"];
 ng._Angular.NgAnchorScroll_Impl_.run = function(this1) {
 	this1();
 };
 ng._Angular.NgScope_Impl_ = function() { };
+ng._Angular.NgScope_Impl_.__name__ = ["ng","_Angular","NgScope_Impl_"];
 ng._Angular.NgScope_Impl_.arrayAccess = function(this1,key) {
 	return Reflect.field(this1,key);
 };
@@ -87,6 +181,7 @@ ng._Angular.NgScope_Impl_.broadcast = function(this1,name,args) {
 	return this1.$broadcast(name,args);
 };
 ng._Angular.NgHttp_Impl_ = function() { };
+ng._Angular.NgHttp_Impl_.__name__ = ["ng","_Angular","NgHttp_Impl_"];
 ng._Angular.NgHttp_Impl_.run = function(this1,requestConfig) {
 	return this1(requestConfig);
 };
@@ -112,6 +207,7 @@ ng._Angular.NgHttp_Impl_.defaults = function(this1) {
 	return this1.defaults;
 };
 ng._Angular.NgCompile_Impl_ = function() { };
+ng._Angular.NgCompile_Impl_.__name__ = ["ng","_Angular","NgCompile_Impl_"];
 ng._Angular.NgCompile_Impl_.runJ = function(this1,element) {
 	return this1(element);
 };
@@ -119,6 +215,7 @@ ng._Angular.NgCompile_Impl_.run = function(this1,element) {
 	return this1(element);
 };
 ng._Angular.NgCacheFactory_Impl_ = function() { };
+ng._Angular.NgCacheFactory_Impl_.__name__ = ["ng","_Angular","NgCacheFactory_Impl_"];
 ng._Angular.NgCacheFactory_Impl_.newCache = function(this1,cacheId,options) {
 	return this1(cacheId,options);
 };
@@ -129,10 +226,12 @@ ng._Angular.NgCacheFactory_Impl_.get = function(this1,cacheId) {
 	return this1.get(cacheId);
 };
 ng._Angular.NgExceptionHandler_Impl_ = function() { };
+ng._Angular.NgExceptionHandler_Impl_.__name__ = ["ng","_Angular","NgExceptionHandler_Impl_"];
 ng._Angular.NgExceptionHandler_Impl_.run = function(this1,exception,cause) {
 	this1(exception,cause);
 };
 ng._Angular.NgInterpolate_Impl_ = function() { };
+ng._Angular.NgInterpolate_Impl_.__name__ = ["ng","_Angular","NgInterpolate_Impl_"];
 ng._Angular.NgInterpolate_Impl_.run = function(this1,text,mustHaveExpression,trustedContext) {
 	return this1(text,mustHaveExpression,trustedContext);
 };
@@ -143,6 +242,7 @@ ng._Angular.NgInterpolate_Impl_.endSymbol = function(this1) {
 	return this1.endSymbol();
 };
 ng._Angular.NgInterval_Impl_ = function() { };
+ng._Angular.NgInterval_Impl_.__name__ = ["ng","_Angular","NgInterval_Impl_"];
 ng._Angular.NgInterval_Impl_.run = function(this1,fn,delay,count,invokeApply) {
 	if(invokeApply == null) invokeApply = true;
 	if(count == null) count = 0;
@@ -155,6 +255,7 @@ ng._Angular.NgInterval_Impl_.flush = function(this1,millis) {
 	this1.flush(millis);
 };
 ng._Angular.NgExprFn_Impl_ = function() { };
+ng._Angular.NgExprFn_Impl_.__name__ = ["ng","_Angular","NgExprFn_Impl_"];
 ng._Angular.NgExprFn_Impl_.run = function(this1,context,locals) {
 	return this1(context,locals);
 };
@@ -168,10 +269,12 @@ ng._Angular.NgExprFn_Impl_.assign = function(this1) {
 	return this1.assign;
 };
 ng._Angular.NgParse_Impl_ = function() { };
+ng._Angular.NgParse_Impl_.__name__ = ["ng","_Angular","NgParse_Impl_"];
 ng._Angular.NgParse_Impl_.run = function(this1,expression) {
 	return this1(expression);
 };
 ng._Angular.NgTimeout_Impl_ = function() { };
+ng._Angular.NgTimeout_Impl_.__name__ = ["ng","_Angular","NgTimeout_Impl_"];
 ng._Angular.NgTimeout_Impl_.run = function(this1,fn,delay,invokeApply) {
 	if(invokeApply == null) invokeApply = true;
 	return this1(fn,delay,invokeApply);
@@ -183,6 +286,7 @@ ng._Angular.NgTimeout_Impl_.flush = function(this1,millis) {
 	return this1.flush(millis);
 };
 ng._Angular.NgController_Impl_ = function() { };
+ng._Angular.NgController_Impl_.__name__ = ["ng","_Angular","NgController_Impl_"];
 ng._Angular.NgController_Impl_.run = function(this1,expression,locals) {
 	if(locals != null && ng.Angular.isUndefined(locals.$scope)) {
 		locals.$scope = { };
@@ -192,6 +296,7 @@ ng._Angular.NgController_Impl_.run = function(this1,expression,locals) {
 };
 ng.NgDirectiveDefinition = function() {
 };
+ng.NgDirectiveDefinition.__name__ = ["ng","NgDirectiveDefinition"];
 ng.NgDirectiveDefinition.prototype = {
 	set_priority: function(val) {
 		this.priority = val;
@@ -277,8 +382,10 @@ ng.NgDirectiveDefinition.prototype = {
 	,get_link: function() {
 		return this.link;
 	}
+	,__class__: ng.NgDirectiveDefinition
 };
 ng._Angular.NgAttributes_Impl_ = function() { };
+ng._Angular.NgAttributes_Impl_.__name__ = ["ng","_Angular","NgAttributes_Impl_"];
 ng._Angular.NgAttributes_Impl_.get = function(this1,attr) {
 	return this1[attr];
 };
@@ -289,6 +396,7 @@ ng._Angular.NgAttributes_Impl_.observe = function(this1,attr,fn) {
 	this1.$observe(attr,fn);
 };
 ng._Angular.NgFormController_Impl_ = function() { };
+ng._Angular.NgFormController_Impl_.__name__ = ["ng","_Angular","NgFormController_Impl_"];
 ng._Angular.NgFormController_Impl_.get_pristine = function(this1) {
 	return this1.$pristine;
 };
@@ -317,11 +425,13 @@ ng._Angular.NgFormController_Impl_.get_error = function(this1) {
 	return this1.$error;
 };
 ng._Angular.NgFilter_Impl_ = function() { };
+ng._Angular.NgFilter_Impl_.__name__ = ["ng","_Angular","NgFilter_Impl_"];
 ng._Angular.NgFilter_Impl_.run = function(this1,name) {
 	return this1(name);
 };
 ng.RouteMapping = function() {
 };
+ng.RouteMapping.__name__ = ["ng","RouteMapping"];
 ng.RouteMapping.prototype = {
 	set_controller: function(val) {
 		this.controller = val;
@@ -379,13 +489,21 @@ ng.RouteMapping.prototype = {
 	,get_caseInsensitiveMatch: function() {
 		return this.caseInsensitiveMatch;
 	}
+	,__class__: ng.RouteMapping
 };
 ng.macro = {};
 ng.macro.InjectionBuilder = function() { };
+ng.macro.InjectionBuilder.__name__ = ["ng","macro","InjectionBuilder"];
+String.prototype.__class__ = String;
+String.__name__ = ["String"];
+Array.__name__ = ["Array"];
 ng.Angular = window.angular;
 var q = window.jQuery;
 ng.JQuery = q;
 if(ng.Angular.isUndefined(window.hxdeps)) window.hxdeps = [];
 window.hxdeps.push("ngRoute");
+if(ng.Angular.isUndefined(window.hxdeps)) window.hxdeps = [];
+window.hxdeps.push("pascalprecht.translate");
+com.haxejs.Controllers.switchLangCtrl = com.haxejs.SwitchLangCtrl;
 com.haxejs.App.main();
 })();
