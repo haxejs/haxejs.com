@@ -97,7 +97,7 @@ com.haxejs.Configs.routeConfig = function(routeProvider) {
 };
 com.haxejs.Configs.translateConfig = function(translateProvider) {
 	translateProvider.useStaticFilesLoader({ prefix : "languages/", suffix : ".json"});
-	translateProvider.registerAvailableLanguageKeys(["en","zh"],{ en_US : "en", en_UK : "en", zh_CN : "zh", zh_TW : "zh"});
+	translateProvider.registerAvailableLanguageKeys(["en","zh"],{ en_US : "en", en_UK : "en", zh_CN : "zh", zh_TW : "zh", '*' : "en"});
 	translateProvider.determinePreferredLanguage();
 };
 com.haxejs.Configs.ieAjaxConfig = function(httpProvider) {
@@ -123,7 +123,7 @@ com.haxejs.SwitchLangCtrl.__name__ = ["com","haxejs","SwitchLangCtrl"];
 com.haxejs.SwitchLangCtrl.__super__ = ng.BaseCtrl;
 com.haxejs.SwitchLangCtrl.prototype = $extend(ng.BaseCtrl.prototype,{
 	changeLanguage: function(langKey) {
-		this.translate["use"](langKey);
+		this.translate.use(langKey);
 	}
 	,__class__: com.haxejs.SwitchLangCtrl
 });

@@ -49,7 +49,8 @@ class Configs implements IConfigs
 		  	'en_US': 'en',
     		'en_UK': 'en',
     		'zh_CN': 'zh',
-    		'zh_TW': 'zh'
+    		'zh_TW': 'zh',
+    		'*':'en'
 		  	});
 		  translateProvider.determinePreferredLanguage();
 	}
