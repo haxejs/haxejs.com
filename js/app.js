@@ -36,13 +36,13 @@ Type.getClassName = function(c) {
 	return a.join(".");
 };
 var ng = {};
-ng.IConfigs = function() { };
-ng.IConfigs.__name__ = ["ng","IConfigs"];
+ng.IRuns = function() { };
+ng.IRuns.__name__ = ["ng","IRuns"];
 var com = {};
 com.haxejs = {};
 com.haxejs.App = function() { };
 com.haxejs.App.__name__ = ["com","haxejs","App"];
-com.haxejs.App.__interfaces__ = [ng.IConfigs];
+com.haxejs.App.__interfaces__ = [ng.IRuns];
 com.haxejs.App.main = function() {
 	try {
 		ng.Angular.module("com.haxejs");
@@ -51,41 +51,56 @@ com.haxejs.App.main = function() {
 		if(window.hxdeps) deps = window.hxdeps; else deps = [];
 		ng.Angular.module("com.haxejs",deps);
 	}
-	com.haxejs.App.ieAjaxConfig.$inject = ["$httpProvider"];
-	com.haxejs.App.translateConfig.$inject = ["$translateProvider"];
-	com.haxejs.App.routeConfig.$inject = ["$routeProvider"];
-	com.haxejs.App.locationConfig.$inject = ["$locationProvider"];
+	com.haxejs.App.appRun.$inject = ["$rootScope"];
+	com.haxejs.Configs.main();
 	com.haxejs.Controllers.main();
-	var func = function(rootScope) {
-		rootScope.loading = true;
-		rootScope.$on("$locationChangeStart",function(event,newUrl,oldUrl) {
-			rootScope.loading = true;
-		});
-		rootScope.$on("$locationChangeSuccess",function(event1,newUrl1,oldUrl1) {
-			rootScope.loading = false;
-		});
-	};
-	func.$inject = ["$rootScope"];
-	ng.Angular.module("com.haxejs").run(func);
-	ng.Angular.module("com.haxejs").config(com.haxejs.App.locationConfig);
-	ng.Angular.module("com.haxejs").config(com.haxejs.App.routeConfig);
-	ng.Angular.module("com.haxejs").config(com.haxejs.App.translateConfig);
-	ng.Angular.module("com.haxejs").config(com.haxejs.App.ieAjaxConfig);
+	ng.Angular.module("com.haxejs").run(com.haxejs.App.appRun);
 };
-com.haxejs.App.locationConfig = function(locationProvider) {
+com.haxejs.App.appRun = function(rootScope) {
+	rootScope.loading = true;
+	rootScope.$on("$locationChangeStart",function(event,newUrl,oldUrl) {
+		rootScope.loading = true;
+	});
+	rootScope.$on("$locationChangeSuccess",function(event1,newUrl1,oldUrl1) {
+		rootScope.loading = false;
+	});
+};
+ng.IConfigs = function() { };
+ng.IConfigs.__name__ = ["ng","IConfigs"];
+com.haxejs.Configs = function() { };
+com.haxejs.Configs.__name__ = ["com","haxejs","Configs"];
+com.haxejs.Configs.__interfaces__ = [ng.IConfigs];
+com.haxejs.Configs.main = function() {
+	try {
+		ng.Angular.module("com.haxejs");
+	} catch( e ) {
+		var deps;
+		if(window.hxdeps) deps = window.hxdeps; else deps = [];
+		ng.Angular.module("com.haxejs",deps);
+	}
+	com.haxejs.Configs.ieAjaxConfig.$inject = ["$httpProvider"];
+	com.haxejs.Configs.translateConfig.$inject = ["$translateProvider"];
+	com.haxejs.Configs.routeConfig.$inject = ["$routeProvider"];
+	com.haxejs.Configs.locationConfig.$inject = ["$locationProvider"];
+	ng.Angular.module("com.haxejs").config(com.haxejs.Configs.locationConfig);
+	ng.Angular.module("com.haxejs").config(com.haxejs.Configs.routeConfig);
+	ng.Angular.module("com.haxejs").config(com.haxejs.Configs.translateConfig);
+	ng.Angular.module("com.haxejs").config(com.haxejs.Configs.ieAjaxConfig);
+};
+com.haxejs.Configs.locationConfig = function(locationProvider) {
 	locationProvider.html5Mode(false);
 };
-com.haxejs.App.routeConfig = function(routeProvider) {
+com.haxejs.Configs.routeConfig = function(routeProvider) {
 	routeProvider.when("/home",new ng.RouteMapping().set_templateUrl("partials/home.html"));
 	routeProvider.when("/getstarted",new ng.RouteMapping().set_templateUrl("partials/getstarted.html"));
 	routeProvider.otherwise(new ng.RouteMapping().set_redirectTo("/home"));
 };
-com.haxejs.App.translateConfig = function(translateProvider) {
+com.haxejs.Configs.translateConfig = function(translateProvider) {
 	translateProvider.useStaticFilesLoader({ prefix : "languages/", suffix : ".json"});
 	translateProvider.registerAvailableLanguageKeys(["en","zh"],{ en_US : "en", en_UK : "en", zh_CN : "zh", zh_TW : "zh"});
 	translateProvider.determinePreferredLanguage();
 };
-com.haxejs.App.ieAjaxConfig = function(httpProvider) {
+com.haxejs.Configs.ieAjaxConfig = function(httpProvider) {
 	httpProvider.defaults.headers.common["Cache-Control"] = "no-cache";
 };
 ng.IControllers = function() { };
