@@ -11,6 +11,9 @@ class Controllers implements IControllers
 
 	@:inject("$scope","$translate")
 	public static var switchLangCtrl:Dynamic = SwitchLangCtrl;
+	
+	@:inject("$scope")
+	public static var twoWayBindingCtrl:Dynamic = TwoWayBindingCtrl;
 }
 
 //use class/type as controller model
@@ -24,5 +27,12 @@ class SwitchLangCtrl extends BaseCtrl{
 
 	public function changeLanguage(langKey:String):Void{
 		translate.use(langKey);
+	}
+}
+
+class TwoWayBindingCtrl extends BaseCtrl {
+	public var name:String;
+	public function new(scope:NgScope) {
+		super(scope);
 	}
 }

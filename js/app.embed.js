@@ -112,6 +112,14 @@ com.haxejs.SwitchLangCtrl.prototype = $extend(ng.BaseCtrl.prototype,{
 	}
 	,__class__: com.haxejs.SwitchLangCtrl
 });
+com.haxejs.TwoWayBindingCtrl = function(scope) {
+	ng.BaseCtrl.call(this,scope);
+};
+com.haxejs.TwoWayBindingCtrl.__name__ = ["com","haxejs","TwoWayBindingCtrl"];
+com.haxejs.TwoWayBindingCtrl.__super__ = ng.BaseCtrl;
+com.haxejs.TwoWayBindingCtrl.prototype = $extend(ng.BaseCtrl.prototype,{
+	__class__: com.haxejs.TwoWayBindingCtrl
+});
 com.haxejs.Controllers = function() { };
 com.haxejs.Controllers.__name__ = ["com","haxejs","Controllers"];
 com.haxejs.Controllers.__interfaces__ = [ng.IControllers];
@@ -123,8 +131,10 @@ com.haxejs.Controllers.main = function() {
 		if(window.hxdeps) deps = window.hxdeps; else deps = [];
 		ng.Angular.module("com.haxejs",deps);
 	}
+	com.haxejs.Controllers.twoWayBindingCtrl.$inject = ["$scope"];
 	com.haxejs.Controllers.switchLangCtrl.$inject = ["$scope","$translate"];
 	ng.Angular.module("com.haxejs").controller("switchLangCtrl",com.haxejs.Controllers.switchLangCtrl);
+	ng.Angular.module("com.haxejs").controller("twoWayBindingCtrl",com.haxejs.Controllers.twoWayBindingCtrl);
 };
 ng._Angular = {};
 ng._Angular.NgAnchorScroll_Impl_ = function() { };
@@ -755,5 +765,6 @@ angular.module("pascalprecht.translate").factory("$translateStaticFilesLoader",[
 if(ng.Angular.isUndefined(window.hxdeps)) window.hxdeps = [];
 window.hxdeps.push("pascalprecht.translate");
 com.haxejs.Controllers.switchLangCtrl = com.haxejs.SwitchLangCtrl;
+com.haxejs.Controllers.twoWayBindingCtrl = com.haxejs.TwoWayBindingCtrl;
 com.haxejs.App.main();
 })();

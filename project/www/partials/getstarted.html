@@ -59,7 +59,56 @@ haxelib dev haxejs-angular haxejs-angular
 					<li><a href="http://www.sublimetext.com">Sublime Text</a> with <a href="https://github.com/clemos/haxe-sublime-bundle">plugin</a></li>
 					<li><a href="http://www.jetbrains.com/idea/">IntelliJ IDEA</a> with <a href="http://plugins.jetbrains.com/plugin/6873?pr=">plugin</a></li>
 				</ul>
-      		</div>      		
+			</div>
+      		
+
+			<div class="row bs-docs-section" id="sample">
+			  <h1 class="col-sm-12">Write a simple sample: Two way data-binding</h1>
+			  <div class="col-sm-8">
+				<pre ng-non-bindable>
+					<p><i>HTML snippet:</i></p>
+					<code data-language="html">
+&lt;div ng-controller=&quot;twoWayBindingCtrl&quot;&gt;
+	&lt;input ng-model=&quot;twoWayBindingCtrl.name&quot; placeholder=&quot;Your name&quot; /&gt;
+	&lt;p>Hello {{twoWayBindingCtrl.name}}&lt;/p&gt;
+&lt;/div&gt;						
+					</code>
+				</pre>				  
+				<pre ng-non-bindable>
+					<p><i>In Controllers.hx file:</i></p>
+					<code data-language="javascript">
+package com.haxejs;
+
+import ng.Angular;
+import ng.IControllers;
+
+class Controllers implements IControllers
+{
+	public static function main(){
+	}
+
+	@:inject("$scope")
+	public static var twoWayBindingCtrl:Dynamic = TwoWayBindingCtrl;
+}
+
+//use class/type as controller model
+class TwoWayBindingCtrl extends BaseCtrl {
+	public var name:String;
+	public function new(scope:NgScope) {
+		super(scope);
+	}
+}				
+					</code>
+				</pre>  
+			  </div>
+			  <div class="col-sm-4">
+				<div ng-controller="twoWayBindingCtrl" class="well">
+					<input ng-model="twoWayBindingCtrl.name" placeholder="Your name" />
+					<p>Hello {{twoWayBindingCtrl.name}}</p>
+				</div>			  
+			  </div>
+			</div>
+			
       	</div>
 	    <div class="col-md-3 bs-docs-sidebar hidden-print hidden-xs hidden-sm" role="complementary">
 	        <ul class="nav bs-docs-sidenav">
@@ -74,6 +123,9 @@ haxelib dev haxejs-angular haxejs-angular
 	            </li>
 	            <li>
 	            	<a href="#/getstarted#code-editors">Code Editors</a>
+	            </li>
+				<li>
+	            	<a href="#/getstarted#sample">Write a simple sample</a>
 	            </li>
 	            <!--
 				<li>
