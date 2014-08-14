@@ -778,6 +778,12 @@ angular.module("pascalprecht.translate").factory("$translateCookieStorage",["$co
  * Copyright (c) 2014 ; Licensed MIT
  */
 angular.module("pascalprecht.translate").factory("$translateLocalStorage",["$window","$translateCookieStorage",function(a,b){var c=function(){var b;return{get:function(c){return b||(b=a.localStorage.getItem(c)),b},set:function(c,d){b=d,a.localStorage.setItem(c,d)}}}(),d="localStorage"in a&&null!==a.localStorage;if(d){var e="pascalprecht.translate.storageTest";try{a.localStorage.setItem(e,"foo"),a.localStorage.removeItem(e)}catch(f){d=!1}}var g=d?c:b;return g}]);;
+/*!
+ * angular-translate - v2.2.0 - 2014-06-03
+ * http://github.com/PascalPrecht/angular-translate
+ * Copyright (c) 2014 ; Licensed MIT
+ */
+angular.module("pascalprecht.translate").factory("$translateMissingTranslationHandlerLog",["$log",function(a){return function(b){a.warn("Translation for "+b+" doesn't exist")}}]);;
 if(ng.Angular.isUndefined(window.hxdeps)) window.hxdeps = [];
 window.hxdeps.push("pascalprecht.translate");
 com.haxejs.Controllers.switchLangCtrl = com.haxejs.SwitchLangCtrl;
