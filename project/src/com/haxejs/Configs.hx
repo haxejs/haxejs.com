@@ -43,6 +43,7 @@ class Configs implements IConfigs
 		  });
 		  //translateProvider.fallbackLanguage("en");
 		  //translateProvider.preferredLanguage('zh');
+		  //translateProvider.useMissingTranslationHandlerLog();
 
 		  //combine registerAvailableLanguageKeys and determinePreferredLanguage to determine by browser default locale
 		  translateProvider.registerAvailableLanguageKeys(["en","zh"],{
