@@ -51,12 +51,12 @@ com.haxejs.App.main = function() {
 		if(window.hxdeps) deps = window.hxdeps; else deps = [];
 		ng.Angular.module("com.haxejs",deps);
 	}
-	com.haxejs.App.appRun.$inject = ["$rootScope"];
+	com.haxejs.App.appRun.$inject = ["$rootScope","$cookies","$location"];
 	com.haxejs.Configs.main();
 	com.haxejs.Controllers.main();
 	ng.Angular.module("com.haxejs").run(com.haxejs.App.appRun);
 };
-com.haxejs.App.appRun = function(rootScope) {
+com.haxejs.App.appRun = function(rootScope,cookies,location) {
 	rootScope.loading = true;
 	rootScope.$on("$locationChangeStart",function(event,newUrl,oldUrl) {
 		rootScope.loading = true;
@@ -454,6 +454,31 @@ ng._Angular.NgFilter_Impl_.__name__ = ["ng","_Angular","NgFilter_Impl_"];
 ng._Angular.NgFilter_Impl_.run = function(this1,name) {
 	return this1(name);
 };
+ng._NgCookies = {};
+ng._NgCookies.NgCookies_Impl_ = function() { };
+ng._NgCookies.NgCookies_Impl_.__name__ = ["ng","_NgCookies","NgCookies_Impl_"];
+ng._NgCookies.NgCookies_Impl_.get = function(this1,key) {
+	return Reflect.field(this1,key);
+};
+ng._NgCookies.NgCookies_Impl_.put = function(this1,key,value) {
+	this1[key] = value;
+};
+ng._NgCookies.NgCookies_Impl_.remove = function(this1,key) {
+	var self = this1;
+	delete self[key];
+};
+ng._NgCookies.NgCookieStore_Impl_ = function() { };
+ng._NgCookies.NgCookieStore_Impl_.__name__ = ["ng","_NgCookies","NgCookieStore_Impl_"];
+ng._NgCookies.NgCookieStore_Impl_.get = function(this1,key) {
+	return Reflect.field(this1,key);
+};
+ng._NgCookies.NgCookieStore_Impl_.put = function(this1,key,value) {
+	this1[key] = value;
+};
+ng._NgCookies.NgCookieStore_Impl_.remove = function(this1,key) {
+	var self = this1;
+	delete self[key];
+};
 ng.RouteMapping = function() {
 };
 ng.RouteMapping.__name__ = ["ng","RouteMapping"];
@@ -525,6 +550,8 @@ Array.__name__ = ["Array"];
 ng.Angular = window.angular;
 var q = window.jQuery;
 ng.JQuery = q;
+if(ng.Angular.isUndefined(window.hxdeps)) window.hxdeps = [];
+window.hxdeps.push("ngCookies");
 if(ng.Angular.isUndefined(window.hxdeps)) window.hxdeps = [];
 window.hxdeps.push("ngRoute");
 if(ng.Angular.isUndefined(window.hxdeps)) window.hxdeps = [];

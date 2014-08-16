@@ -2,6 +2,7 @@ package com.haxejs;
 
 import ng.Angular;
 import ng.IRuns;
+import ng.NgCookies;
 
 class App implements IRuns
 {
@@ -22,14 +23,20 @@ class App implements IRuns
 	//ui.router events:(broadcast)
 	//-- $stateNotFound,$stateChangeStart,$stateChangeSuccess,$stateChangeError,$viewContentLoading,
 	//-- $routeChangeStart,$routeChangeSuccess,$routeChangeError	
-	@:inject("$rootScope")
-	public static var appRun:Dynamic = function(rootScope:NgRootScope){
+	@:inject("$rootScope","$cookies","$location")
+	public static var appRun:Dynamic = function(rootScope:NgRootScope,cookies:NgCookies,location:NgLocation){
 		rootScope["loading"] = true;
 		rootScope.on("$locationChangeStart",function(event,newUrl,oldUrl){
 			rootScope["loading"] = true;
 		});
 		rootScope.on("$locationChangeSuccess",function(event,newUrl,oldUrl){
+			//var index:Int = newUrl.indexOf("#/");
+			//if(index>0) cookies.put("lastUrl",newUrl.substr(index+1));
 			rootScope["loading"] = false;
 		});
+		//for cordova mobile app to remember last screen and show it next time
+		// if (cookies.get("lastUrl")!= null && location.url()==""){
+		// 	location.url(cookies.get("lastUrl"));
+		// }
 	};
 }
