@@ -1,5 +1,6 @@
 <declarations>
 	<groups>
+		<group id="@ionic" at="menu-toggle,menu-close,nav-clear,collection-repeat,collection-item-width,collection-item-height" />
 		<group id="@angular" at="ng-app,ng-bind,ng-bind-html,ng-bind-html-unsafe,ng-bind-template,ng-blur,ng-change,ng-checked,ng-class,ng-class-even,ng-class-odd,ng-click,ng-cloak,ng-controller,ng-copy,ng-csp,ng-cut,ng-dblclick,ng-disabled,ng-focus,ng-form,ng-hide,ng-href,ng-if,ng-include,ng-init,ng-keydown,ng-keypress,ng-keyup,ng-list,ng-model,ng-mousedown,ng-mouseenter,ng-mouseleave,ng-mousemove,ng-mouseover,ng-mouseup,ng-multiple,ng-non-bindable,ng-open,ng-paste,ng-options,ng-pluralize,ng-readonly,ng-repeat,ng-repeat-start,ng-repeat-end,ng-selected,ng-show,ng-src,ng-srcset,ng-style,ng-submit,ng-swipe-left,ng-swipe-right,ng-switch,ng-switch-when,ng-switch-default,ng-transclude,ng-trim,ng-value,ng-view" />
 		<group id="@angular-ui" at="ui-jq,ui-options,ui-codemirror,ui-event,ui-calendar,ui-map,ui-map-marker,ui-map-info-window,ui-date,ui-keypress,ui-keydown,ui-keyup,ui-mask,ui-if,ui-reset,ui-animate,ui-scrollfix,ui-select2,ui-show,ui-hide,ui-toggle,ui-tinymce,ui-sortable,ui-currency,ui-route" />
 		<group id="@global" at="accesskey,class,contenteditable,dir,id,lang,style:s,tabindex,title,translate" />
@@ -8,7 +9,7 @@
 		<group id="@media-events" at="onloadstart:e,onprogress:e,onsuspend:e,onabort:e,onerror:e,onemptied:e,onstalled:e,onloadedmetadata:e,onloadeddata:e,oncanplay:e,oncanplaythrough:e,onplaying:e,onwaiting:e,onseeking:e,onseeked:e,onended:e,ondurationchange:e,ontimeupdate:e,onplay:e,onpause:e,onratechange:e,onvolumechange:e" />		
 	</groups>
 	<tags>
-		<a at="charset,@global,coords,href,hreflang,media,name,onblur:e,@events,onfocus:e,rel,rev,shape,tabindex,target,type,@angular,@angular-ui" />
+		<a at="charset,@global,coords,href,hreflang,media,name,onblur:e,@events,onfocus:e,rel,rev,shape,tabindex,target,type,@angular,@angular-ui,@ionic" />
 		<abbr at="@global,@events" />
 		<acronym at="@global,@events" />
 		<address at="@global,@events" />
@@ -25,7 +26,7 @@
 		<blockquote at="cite,@global,@events" />
 		<body at="align:s,background:s,bgcolor:s,@global,link,@events,onload:e,onunload:e,text,vlink" />
 		<br leaf="yes" at="@global,clear" />
-		<button at="@global,disabled,name,onblur:e,@events,onfocus:e,type,value" />
+		<button at="@global,disabled,name,onblur:e,@events,onfocus:e,type,value,@ionic" />
 		<caption at="align:s,@global,@events" />
 		<canvas at="@global,@events,width:s,height:s" />
 		<center at="@global,@events" />
@@ -119,5 +120,34 @@
 		<ul at="@global,compact,@events,type" />
 		<var at="@global,@events" />
 		<video at="@global,@events,@media-global,@media-events,poster,width:s,height:s" />
+		<ion-tabs at="delegate-handle" />
+		<ion-tab at="title,icon,href,on-select,on-deselect,icon-on,icon-off,badge,badge-style,ng-click" />
+		<ion-side-menus at="delegate-handle" />
+		<ion-side-menu-content at="drag-content,edge-drag-threshold" />
+		<ion-side-menu at="side,width,is-enabled" />
+		<ion-nav-view at="animation,name" />
+		<ion-view at="title,hide-back-button,hide-nav-bar" />
+		<ion-nav-bar at="elegate-handle,align-title,no-tap-scroll,animation" />
+		<ion-nav-buttons at="side" />
+		<ion-nav-back-button at="ng-click" />
+		<ion-header-bar at="align-title,no-tap-scroll" />
+		<ion-footer-bar at="align-title" />
+		<ion-content at="delegate-handle,direction,padding,scroll,overflow-scroll,scrollbar-x,scrollbar-y,start-y,on-scroll,on-scroll-complete,has-bouncing" />
+		<ion-refresher at="on-refresh,on-pulling,pulling-icon,pulling-text,refreshing-icon,refreshing-text" />
+		<ion-pane at="" />
+		<ion-scroll at="delegate-handle,direction,paging,scrollbar-x,scrollbar-y,on-scroll,zooming,min-zoom,max-zoom,has-bouncing" />
+		<ion-infinite-scroll at="ng-if,icon,distance,on-infinite" />
+		<ion-list at="delegate-handle,type,show-delete,show-reorder,can-swipe,ng-controller" />
+		<ion-item at="ng-repeat" />
+		<ion-delete-button at="ng-click" />
+		<ion-reorder-button at="on-reorder" />
+		<ion-option-button at="ng-click" />
+		<ion-checkbox at="ng-model" />
+		<ion-radio at="ng-model,ng-value" />
+		<ion-toggle at="ng-model,toggle-class" />
+		<ion-slide-box at="delegate-handle,does-continue,auto-play,slide-interval,show-pager,pager-click,on-slide-changed,active-slide" />
+		<ion-slide at="" />
+		<ion-modal-view at="" />
+		<ion-popover-view at="" />
 	</tags>
 </declarations>
