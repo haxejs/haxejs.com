@@ -1,6 +1,7 @@
 <declarations>
 	<groups>
 		<group id="@ionic" at="menu-toggle,menu-close,nav-clear,collection-repeat,collection-item-width,collection-item-height" />
+		<group id="@ionic-events" at="on-hold,on-tap,on-touch,on-release,on-drag,on-drag-up,on-drag-left,on-drag-right,on-drag-down,on-swipe,on-swipe-up,on-swipe-down,on-swipe-left,on-swipe-right" />
 		<group id="@angular" at="ng-app,ng-bind,ng-bind-html,ng-bind-html-unsafe,ng-bind-template,ng-blur,ng-change,ng-checked,ng-class,ng-class-even,ng-class-odd,ng-click,ng-cloak,ng-controller,ng-copy,ng-csp,ng-cut,ng-dblclick,ng-disabled,ng-focus,ng-form,ng-hide,ng-href,ng-if,ng-include,ng-init,ng-keydown,ng-keypress,ng-keyup,ng-list,ng-model,ng-mousedown,ng-mouseenter,ng-mouseleave,ng-mousemove,ng-mouseover,ng-mouseup,ng-multiple,ng-non-bindable,ng-open,ng-paste,ng-options,ng-pluralize,ng-readonly,ng-repeat,ng-repeat-start,ng-repeat-end,ng-selected,ng-show,ng-src,ng-srcset,ng-style,ng-submit,ng-swipe-left,ng-swipe-right,ng-switch,ng-switch-when,ng-switch-default,ng-transclude,ng-trim,ng-value,ng-view" />
 		<group id="@angular-ui" at="ui-jq,ui-options,ui-codemirror,ui-event,ui-calendar,ui-map,ui-map-marker,ui-map-info-window,ui-date,ui-keypress,ui-keydown,ui-keyup,ui-mask,ui-if,ui-reset,ui-animate,ui-scrollfix,ui-select2,ui-show,ui-hide,ui-toggle,ui-tinymce,ui-sortable,ui-currency,ui-route" />
 		<group id="@global" at="accesskey,class,contenteditable,dir,id,lang,style:s,tabindex,title,translate" />
@@ -9,7 +10,7 @@
 		<group id="@media-events" at="onloadstart:e,onprogress:e,onsuspend:e,onabort:e,onerror:e,onemptied:e,onstalled:e,onloadedmetadata:e,onloadeddata:e,oncanplay:e,oncanplaythrough:e,onplaying:e,onwaiting:e,onseeking:e,onseeked:e,onended:e,ondurationchange:e,ontimeupdate:e,onplay:e,onpause:e,onratechange:e,onvolumechange:e" />		
 	</groups>
 	<tags>
-		<a at="charset,@global,coords,href,hreflang,media,name,onblur:e,@events,onfocus:e,rel,rev,shape,tabindex,target,type,@angular,@angular-ui,@ionic" />
+		<a at="charset,@global,coords,href,hreflang,media,name,onblur:e,@events,onfocus:e,rel,rev,shape,tabindex,target,type,@angular,@angular-ui,@ionic,@ionic-events" />
 		<abbr at="@global,@events" />
 		<acronym at="@global,@events" />
 		<address at="@global,@events" />
@@ -26,9 +27,9 @@
 		<blockquote at="cite,@global,@events" />
 		<body at="align:s,background:s,bgcolor:s,@global,link,@events,onload:e,onunload:e,text,vlink" />
 		<br leaf="yes" at="@global,clear" />
-		<button at="@global,disabled,name,onblur:e,@events,onfocus:e,type,value,@ionic" />
+		<button at="@global,disabled,name,onblur:e,@events,onfocus:e,type,value,@ionic,@ionic-events" />
 		<caption at="align:s,@global,@events" />
-		<canvas at="@global,@events,width:s,height:s" />
+		<canvas at="@global,@events,width:s,height:s,@ionic-events" />
 		<center at="@global,@events" />
 		<cite at="@global,@events" />
 		<code at="@global,@events" />
@@ -39,7 +40,7 @@
 		<del at="cite,@global,datetime,@events" />
 		<dfn at="@global,@events" />
 		<dir at="@global,compact,@events" />
-		<div at="align:s,@global,@events,@angular,@angular-ui" />
+		<div at="align:s,@global,@events,@angular,@angular-ui,@ionic,@ionic-events" />
 		<dl at="@global,compact,@events" />
 		<dt at="@global,@events" />
 		<em at="@global,@events" />
@@ -94,7 +95,7 @@
 		<s at="@global,@events" />
 		<samp at="@global,@events" />
 		<section at="@global,@events" />
-		<span at="@global,@events,@angular,@angular-ui" />
+		<span at="@global,@events,@angular,@angular-ui,@ionic,@ionic-events" />
 		<script at="async,charset,defer,language,src,type,id" />
 		<select at="@global,disabled,autofocus,form,multiple,name,onblur:e,onchange:e,@events,onfocus:e,size,ng-model,required,ng-required,ng-options" />
 		<small at="@global,@events" />
