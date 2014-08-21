@@ -6,7 +6,7 @@
 "GETSTARTED_TEXT": "An overview of Haxejs, how to setup and use, basic templates and examples, and more.",
 "BUTTON_TEXT_EN": "english",
 "BUTTON_TEXT_ZH": "chinese",
-"HOME_FEATURE1_TITLE":"Cross-platform,everywhere",
+"HOME_FEATURE1_TITLE":"Cross-platform hybrid mobile apps with Ionic and Cordova",
 "HOME_FEATURE1_TEXT":"Create hybrid mobile apps with the web technologies you love. Develop once, deploy everywhere.",
 "HOME_FEATURE2_TITLE":"Object-oriented programming",
 "HOME_FEATURE2_TEXT":"Use modern, high level, strictly typed programming language <a href='http://www.haxe.org'>Haxe</a>(very similar to Java) to generate elegant javascript, it provides <strong>compiler error check</strong> and <strong>code completions</strong> with many IDE tools.",
