@@ -1,9 +1,22 @@
 {
 "HEADLINE": "Haxejs, Angularjs的生态港",
-"HOME_TITLE": "为大型mobile/web应用而生",
-"HOME_TEXT": "Haxejs帮助来自不同平台的开发者快速构建复杂、高性能的前端应用。",
+"HOME_TITLE": "为大型跨平台应用而生",
+"HOME_TEXT": "Haxejs帮助来自不同平台的开发者快速构建复杂、高性能的移动互联网应用。",
 "GETSTARTED_TITLE": "新手起步",
 "GETSTARTED_TEXT": "Haxejs是什么，怎么搭建，怎样使用，模板与示例，等等。",
 "BUTTON_TEXT_EN": "英文",
-"BUTTON_TEXT_ZH": "中文"
+"BUTTON_TEXT_ZH": "中文",
+"HOME_FEATURE1_TITLE":"跨平台，全通路到达",
+"HOME_FEATURE1_TEXT":"使用你熟悉且喜爱的web技术开发高性能移动应用，一次开发，到处部署。",
+"HOME_FEATURE2_TITLE":"面向对象编程",
+"HOME_FEATURE2_TEXT":"Use modern, high level, strictly typed programming language <a href='http://www.haxe.org'>Haxe</a>(very similar to Java) to generate elegant javascript, it provides <strong>compiler error check</strong> and <strong>code completions</strong> with many IDE tools.",
+"HOME_FEATURE3_TITLE":"拥抱angularjs优雅设计哲学",
+"HOME_FEATURE3_TEXT":"<a href='http://angularjs.org'>Angularjs</a> is elegant and well designed, and it is the core of haxejs framework, many good javascript libraries are rewritten in angularjs way, and integrated seamlessly.",
+"HOME_FEATURE4_TITLE":"沉淀最佳实践",
+"HOME_FEATURE4_TEXT":"Best Practices, Lessons, Tricks are distilled and enforced in the libraries or project templates. They are reusable and very valuable.",
+"HOME_FEATURE5_TITLE":"先进的库管理",
+"HOME_FEATURE5_TEXT":"Hundreds of haxe libraries are easy to put under your fingers, give you lots of choices.",
+"HOME_FEATURE6_TITLE":"第三方js库维护不再烦恼",
+"HOME_FEATURE6_TEXT":"All javascript libraries your code needs can be embeded to a single js file or copied to a special place automatically so they will not bother you from now on."
+
 }

@@ -1,9 +1,21 @@
 {
 "HEADLINE": "Haxejs, Angularjs Ecosystem Hub",
-"HOME_TITLE": "Born for large scale mobile/web app",
-"HOME_TEXT": "Haxejs helps developers from all platforms build complex, high performance client apps for the modern web.",
+"HOME_TITLE": "Born for large scale cross-platform app",
+"HOME_TEXT": "Haxejs helps developers from all platforms build complex, high performance client apps for the modern web and mobile devices.",
 "GETSTARTED_TITLE": "Get started",
 "GETSTARTED_TEXT": "An overview of Haxejs, how to setup and use, basic templates and examples, and more.",
 "BUTTON_TEXT_EN": "english",
-"BUTTON_TEXT_ZH": "chinese"
+"BUTTON_TEXT_ZH": "chinese",
+"HOME_FEATURE1_TITLE":"Cross-platform,everywhere",
+"HOME_FEATURE1_TEXT":"Create hybrid mobile apps with the web technologies you love. Develop once, deploy everywhere.",
+"HOME_FEATURE2_TITLE":"Object-oriented programming",
+"HOME_FEATURE2_TEXT":"Use modern, high level, strictly typed programming language <a href='http://www.haxe.org'>Haxe</a>(very similar to Java) to generate elegant javascript, it provides <strong>compiler error check</strong> and <strong>code completions</strong> with many IDE tools.",
+"HOME_FEATURE3_TITLE":"Powerful with angularjs, and other directives, services",
+"HOME_FEATURE3_TEXT":"<a href='http://angularjs.org'>Angularjs</a> is elegant and well designed, and it is the core of haxejs framework, many good javascript libraries are rewritten in angularjs way, and integrated seamlessly.",
+"HOME_FEATURE4_TITLE":"Distilled and Enforced Best Practices",
+"HOME_FEATURE4_TEXT":"Best Practices, Lessons, Tricks are distilled and enforced in the libraries or project templates. They are reusable and very valuable.",
+"HOME_FEATURE5_TITLE":"Cut-edge library manager",
+"HOME_FEATURE5_TEXT":"Hundreds of haxe libraries are easy to put under your fingers, give you lots of choices.",
+"HOME_FEATURE6_TITLE":"Manage javascript libraries easily",
+"HOME_FEATURE6_TEXT":"All javascript libraries your code needs can be embeded to a single js file or copied to a special place automatically so they will not bother you from now on."
 }
