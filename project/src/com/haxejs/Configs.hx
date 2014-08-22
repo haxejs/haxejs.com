@@ -19,6 +19,7 @@ class Configs implements IConfigs
 	@:inject("$routeProvider")
 	public static var routeConfig:Dynamic = function(routeProvider:NgRouteProvider) {
 		routeProvider.when("/home",new RouteMapping().set_templateUrl('partials/home.html'));
+		routeProvider.when("/understand", new RouteMapping().set_templateUrl('partials/understand.html'));
 		routeProvider.when("/getstarted",new RouteMapping().set_templateUrl('partials/getstarted.html'));
 		routeProvider.otherwise(new RouteMapping().set_redirectTo('/home'));
 	}
