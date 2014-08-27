@@ -94,6 +94,7 @@ com.haxejs.Configs.routeConfig = function(routeProvider) {
 	routeProvider.when("/home",new ng.RouteMapping().set_templateUrl("partials/home.html"));
 	routeProvider.when("/understand",new ng.RouteMapping().set_templateUrl("partials/understand.html"));
 	routeProvider.when("/getstarted",new ng.RouteMapping().set_templateUrl("partials/getstarted.html"));
+	routeProvider.when("/showcase",new ng.RouteMapping().set_templateUrl("partials/showcase.html"));
 	routeProvider.otherwise(new ng.RouteMapping().set_redirectTo("/home"));
 };
 com.haxejs.Configs.translateConfig = function(translateProvider) {
@@ -124,7 +125,7 @@ com.haxejs.SwitchLangCtrl.__name__ = ["com","haxejs","SwitchLangCtrl"];
 com.haxejs.SwitchLangCtrl.__super__ = ng.BaseCtrl;
 com.haxejs.SwitchLangCtrl.prototype = $extend(ng.BaseCtrl.prototype,{
 	changeLanguage: function(langKey) {
-		this.translate["use"](langKey);
+		this.translate.use(langKey);
 	}
 	,__class__: com.haxejs.SwitchLangCtrl
 });
