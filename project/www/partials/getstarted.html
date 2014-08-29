@@ -62,8 +62,8 @@ haxelib dev haxejs-angular haxejs-angular
 			</div>
       		
 
-			<div class="row bs-docs-section" id="sample">
-			  <h1 class="col-sm-12">Write a simple sample: Two way data-binding</h1>
+			<div class="row bs-docs-section" id="twoWayBinding">
+			  <h1 class="col-sm-12">Two way data-binding sample</h1>
 			  <div class="col-sm-8">
 				<pre ng-non-bindable>
 					<p><i>HTML snippet:</i></p>
@@ -108,7 +108,19 @@ class TwoWayBindingCtrl extends BaseCtrl {
 				</div>			  
 			  </div>
 			</div>
-			
+
+			<div class="row bs-docs-section" id="addressBook">
+				<h1 class="col-sm-12">Address Book sample</h1>
+				<div ng-controller="addressBookCtrl" class="col-sm-12 well">
+					<div class="col-sm-12" ng-grid="addressBookCtrl.myOptions" style="height:200px"></div>
+					<hr class="half-rule">
+					<button class="btn btn-danger btn-large" ng-click="addressBookCtrl.remove()">Delete</button>
+					<button class="btn btn-info btn-large" ng-click="addressBookCtrl.update()">Update</button>
+					<button class="btn btn-primary btn-large" ng-click="addressBookCtrl.add()">Add</button>
+					<p ng-show="addressBookCtrl.diffs.length>0">Data updated: {{addressBookCtrl.diffs | json}}</p>
+				</div>
+		    </div>	
+
       	</div>
 	    <div class="col-md-3 bs-docs-sidebar hidden-print hidden-xs hidden-sm" role="complementary">
 	        <ul class="nav bs-docs-sidenav">
@@ -125,7 +137,10 @@ class TwoWayBindingCtrl extends BaseCtrl {
 	            	<a href="#/getstarted#code-editors">Code Editors</a>
 	            </li>
 				<li>
-	            	<a href="#/getstarted#sample">Write a simple sample</a>
+	            	<a href="#/getstarted#twoWayBinding">Two-way data-binding sample</a>
+	            </li>
+	            <li>
+	            	<a href="#/getstarted#addressBook">Address Book sample</a>
 	            </li>
 	            <!--
 				<li>

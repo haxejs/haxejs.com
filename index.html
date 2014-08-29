@@ -22,6 +22,8 @@
          The remedy is simple, just add the following styling to your application:
     -->
     <style type="text/css">.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }</style>
+	
+	<link href="bower_components/ng-grid/ng-grid.min.css" rel="stylesheet">
 
     <!-- To make AngularJS work with IE7 and earlier, we need to polyfill JSON.stringify. -->
     <!--[if lt IE 9]>
@@ -94,9 +96,7 @@
           <ul class="nav navbar-nav">            
             <li><a href="#/understand" translate="UNDERSTAND_TITLE"></a></li>
             <li><a href="#/getstarted" translate="GETSTARTED_TITLE"></a></li>
-            <!--
             <li><a href="#/showcase"   translate="SHOWCASE_TITLE"></a></li>
-            -->
           </ul>
         <!--
           <ul class="nav navbar-nav navbar-right">
@@ -148,15 +148,16 @@
       </div>
     </footer>
 
-    <!-- Include all compiled plugins (below), or include individual files as needed
-        <script src="bower_components/jquery/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed        
     --> 
+	  <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="js/app.embed.js"></script>
     <!-- Bootstrap js plugins if we use bootstrap components, however, it is not angular native style, 
     please use haxejs-angular-bootstrap if IE9 and above support is prefered.
         <script src="js/docs.min.js"></script>
     --> 
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	  <script src="bower_components/ng-grid/ng-grid-2.0.12.min.js"></script>
 
   </body>
 </html>

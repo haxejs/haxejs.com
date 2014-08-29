@@ -16,6 +16,24 @@ HxOverrides.substr = function(s,pos,len) {
 	} else if(len < 0) len = s.length + len - pos;
 	return s.substr(pos,len);
 };
+HxOverrides.indexOf = function(a,obj,i) {
+	var len = a.length;
+	if(i < 0) {
+		i += len;
+		if(i < 0) i = 0;
+	}
+	while(i < len) {
+		if(a[i] === obj) return i;
+		i++;
+	}
+	return -1;
+};
+HxOverrides.remove = function(a,obj) {
+	var i = HxOverrides.indexOf(a,obj,0);
+	if(i == -1) return false;
+	a.splice(i,1);
+	return true;
+};
 var Reflect = function() { };
 Reflect.__name__ = ["Reflect"];
 Reflect.field = function(o,field) {
@@ -117,6 +135,59 @@ ng.BaseCtrl.__name__ = ["ng","BaseCtrl"];
 ng.BaseCtrl.prototype = {
 	__class__: ng.BaseCtrl
 };
+com.haxejs.AddressBookCtrl = function(scope) {
+	this.diffs = [];
+	this.myDataCopy = [];
+	this.mySelectedItems = [];
+	this.myData = [{ id : "501", name : "zhang san", location : "shanghai", office : "C-103", telephone : "x55778", cellphone : "650-353-1239"},{ id : "502", name : "peter", location : "shanghai", office : "C-104", telephone : "x55779", cellphone : "650-353-1238"}];
+	this.myOptions = { data : "addressBookCtrl.myData", enableCellSelection : false, enableRowSelection : true, enableCellEdit : true, showSelectionCheckbox : true, checkboxHeaderTemplate : "<input class=\"ngSelectionHeader\" type=\"checkbox\" ng-model=\"allSelected\" ng-change=\"toggleSelectAll(allSelected)\"/>", columnDefs : [{ field : "id", displayName : "ID", enableCellEdit : false},{ field : "name", displayName : "Name", enableCellEdit : true},{ field : "location", displayName : "Location", enableCellEdit : true},{ field : "office", displayName : "Office", enableCellEdit : true},{ field : "telephone", displayName : "Telephone", enableCellEdit : true},{ field : "cellphone", displayName : "Cellphone", enableCellEdit : true}]};
+	ng.BaseCtrl.call(this,scope);
+	ng.Angular.copy(this.myData,this.myDataCopy);
+	this.myOptions.selectedItems = this.mySelectedItems;
+};
+com.haxejs.AddressBookCtrl.__name__ = ["com","haxejs","AddressBookCtrl"];
+com.haxejs.AddressBookCtrl.__super__ = ng.BaseCtrl;
+com.haxejs.AddressBookCtrl.prototype = $extend(ng.BaseCtrl.prototype,{
+	remove: function() {
+		var _g = 0;
+		var _g1 = this.mySelectedItems;
+		while(_g < _g1.length) {
+			var item = _g1[_g];
+			++_g;
+			HxOverrides.remove(this.myData,item);
+		}
+		this.mySelectedItems.splice(0,this.mySelectedItems.length);
+	}
+	,add: function() {
+		this.myData.push({ id : "", name : "?", location : "?", office : "?", telephone : "?", cellphone : "?"});
+	}
+	,update: function() {
+		this.diffs = [];
+		var _g = 0;
+		var _g1 = this.myData;
+		while(_g < _g1.length) {
+			var item = _g1[_g];
+			++_g;
+			if(item.id == "") {
+				this.diffs.push(item);
+				continue;
+			}
+			var _g2 = 0;
+			var _g3 = this.myDataCopy;
+			while(_g2 < _g3.length) {
+				var old = _g3[_g2];
+				++_g2;
+				if(item.id == old.id) {
+					if(ng.Angular.equals(item,old) == false) {
+						this.diffs.push(item);
+						continue;
+					}
+				}
+			}
+		}
+	}
+	,__class__: com.haxejs.AddressBookCtrl
+});
 com.haxejs.SwitchLangCtrl = function(scope,translate) {
 	ng.BaseCtrl.call(this,scope);
 	this.translate = translate;
@@ -148,10 +219,12 @@ com.haxejs.Controllers.main = function() {
 		if(window.hxdeps) deps = window.hxdeps; else deps = [];
 		ng.Angular.module("com.haxejs",deps);
 	}
+	com.haxejs.Controllers.addressBookCtrl.$inject = ["$scope"];
 	com.haxejs.Controllers.twoWayBindingCtrl.$inject = ["$scope"];
 	com.haxejs.Controllers.switchLangCtrl.$inject = ["$scope","$translate"];
 	ng.Angular.module("com.haxejs").controller("switchLangCtrl",com.haxejs.Controllers.switchLangCtrl);
 	ng.Angular.module("com.haxejs").controller("twoWayBindingCtrl",com.haxejs.Controllers.twoWayBindingCtrl);
+	ng.Angular.module("com.haxejs").controller("addressBookCtrl",com.haxejs.Controllers.addressBookCtrl);
 };
 ng._Angular = {};
 ng._Angular.NgAnchorScroll_Impl_ = function() { };
@@ -546,10 +619,15 @@ ng.RouteMapping.prototype = {
 ng.macro = {};
 ng.macro.InjectionBuilder = function() { };
 ng.macro.InjectionBuilder.__name__ = ["ng","macro","InjectionBuilder"];
+if(Array.prototype.indexOf) HxOverrides.indexOf = function(a,o,i) {
+	return Array.prototype.indexOf.call(a,o,i);
+};
 String.prototype.__class__ = String;
 String.__name__ = ["String"];
 Array.__name__ = ["Array"];
 ng.Angular = window.angular;
+if(ng.Angular.isUndefined(window.hxdeps)) window.hxdeps = [];
+window.hxdeps.push("ngGrid");
 var q = window.jQuery;
 ng.JQuery = q;
 if(ng.Angular.isUndefined(window.hxdeps)) window.hxdeps = [];
@@ -560,5 +638,6 @@ if(ng.Angular.isUndefined(window.hxdeps)) window.hxdeps = [];
 window.hxdeps.push("pascalprecht.translate");
 com.haxejs.Controllers.switchLangCtrl = com.haxejs.SwitchLangCtrl;
 com.haxejs.Controllers.twoWayBindingCtrl = com.haxejs.TwoWayBindingCtrl;
+com.haxejs.Controllers.addressBookCtrl = com.haxejs.AddressBookCtrl;
 com.haxejs.App.main();
 })();
