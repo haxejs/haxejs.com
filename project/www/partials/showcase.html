@@ -23,3 +23,11 @@
             </div>
 			    </div>
     </div>		  
+	
+	<div class="container bs-docs-container" ng-controller="addressBookCtrl">
+		<div ng-grid="addressBookCtrl.myOptions" style="height:200px"></div>
+		<button class="btn btn-danger btn-large" ng-click="addressBookCtrl.remove()">Delete</button>
+		<button class="btn btn-info btn-large" ng-click="addressBookCtrl.update()">Update</button>
+		<button class="btn btn-primary btn-large" ng-click="addressBookCtrl.add()">Add</button>
+		<p ng-show="addressBookCtrl.diffs.length>0">Data updated: {{addressBookCtrl.diffs | json}}</p>
+    </div>	

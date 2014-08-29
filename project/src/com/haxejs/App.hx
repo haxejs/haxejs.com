@@ -6,6 +6,12 @@ import ng.NgCookies;
 
 class App implements IRuns
 {
+	private static function __init__() : Void untyped {
+		//add "ngGrid" to global module dependencies
+		if (Angular.isUndefined(window.hxdeps))window.hxdeps = [];
+		window.hxdeps.push("ngGrid");
+	}
+		
 	public static function main() {
 		Configs.main();
 		Controllers.main();

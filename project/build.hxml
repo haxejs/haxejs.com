@@ -9,6 +9,7 @@
 -main com.haxejs.App
 -lib haxejs-angular
 -D embed_js
+-D use_jqlite
 -cmd "cp -R www/*  ../"
 
 --next
