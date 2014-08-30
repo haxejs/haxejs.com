@@ -114,9 +114,9 @@ class TwoWayBindingCtrl extends BaseCtrl {
 				<div ng-controller="addressBookCtrl" class="col-sm-12 well">
 					<div class="col-sm-12" ng-grid="addressBookCtrl.myOptions" style="height:200px"></div>
 					<hr class="half-rule">
-					<button class="btn btn-danger btn-large" ng-click="addressBookCtrl.remove()">Delete</button>
-					<button class="btn btn-info btn-large" ng-click="addressBookCtrl.update()">Update</button>
-					<button class="btn btn-primary btn-large" ng-click="addressBookCtrl.add()">Add</button>
+					<button class="btn btn-danger btn-large col-sm-2" ng-click="addressBookCtrl.remove()">Delete</button>
+					<button class="btn btn-info btn-large col-sm-2 col-sm-offset-3" ng-click="addressBookCtrl.update()">Update</button>
+					<button class="btn btn-primary btn-large col-sm-2 col-sm-offset-3" ng-click="addressBookCtrl.add()">Add</button>
 					<p ng-show="addressBookCtrl.diffs.length>0">Data updated: {{addressBookCtrl.diffs | json}}</p>
 				</div>
 		    </div>	
