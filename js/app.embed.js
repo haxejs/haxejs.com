@@ -616,6 +616,9 @@ ng.RouteMapping.prototype = {
 	}
 	,__class__: ng.RouteMapping
 };
+ng.macro = {};
+ng.macro.InjectionBuilder = function() { };
+ng.macro.InjectionBuilder.__name__ = ["ng","macro","InjectionBuilder"];
 if(Array.prototype.indexOf) HxOverrides.indexOf = function(a,o,i) {
 	return Array.prototype.indexOf.call(a,o,i);
 };
@@ -841,6 +844,9 @@ d.prop("selected",!1):l=c;f?a.$watch(f,function(a,c){e.$set("value",a);a!==c&&l.
 ng.Angular = window.angular;
 if(ng.Angular.isUndefined(window.hxdeps)) window.hxdeps = [];
 window.hxdeps.push("ngGrid");
+if(typeof($) == 'undefined') null;
+var q = window.jQuery;
+ng.JQuery = q;
 /*
  AngularJS v1.2.22
  (c) 2010-2014 Google, Inc. http://angularjs.org
