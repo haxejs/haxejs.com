@@ -107,6 +107,7 @@ com.haxejs.Configs.main = function() {
 };
 com.haxejs.Configs.locationConfig = function(locationProvider) {
 	locationProvider.html5Mode(false);
+	locationProvider.hashPrefix("!");
 };
 com.haxejs.Configs.routeConfig = function(routeProvider) {
 	routeProvider.when("/home",new ng.RouteMapping().set_templateUrl("partials/home.html"));
@@ -196,7 +197,7 @@ com.haxejs.SwitchLangCtrl.__name__ = ["com","haxejs","SwitchLangCtrl"];
 com.haxejs.SwitchLangCtrl.__super__ = ng.BaseCtrl;
 com.haxejs.SwitchLangCtrl.prototype = $extend(ng.BaseCtrl.prototype,{
 	changeLanguage: function(langKey) {
-		this.translate.use(langKey);
+		this.translate["use"](langKey);
 	}
 	,__class__: com.haxejs.SwitchLangCtrl
 });

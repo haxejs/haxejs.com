@@ -14,6 +14,7 @@ class Configs implements IConfigs
 	@:inject("$locationProvider")
 	public static var locationConfig:Dynamic = function(locationProvider:NgLocationProvider) {
 		locationProvider.html5Mode(false);
+		locationProvider.hashPrefix("!");
 	}
 
 	@:inject("$routeProvider")
