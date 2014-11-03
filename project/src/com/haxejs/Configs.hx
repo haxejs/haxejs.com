@@ -22,6 +22,7 @@ class Configs implements IConfigs
 		routeProvider.when("/home",new RouteMapping().set_templateUrl('partials/home.html'));
 		routeProvider.when("/understand", new RouteMapping().set_templateUrl('partials/understand.html'));
 		routeProvider.when("/getstarted",new RouteMapping().set_templateUrl('partials/getstarted.html'));
+		routeProvider.when("/kanduoduo", new RouteMapping().set_templateUrl('partials/kanduoduo.html'));
 		routeProvider.when("/showcase",new RouteMapping().set_templateUrl('partials/showcase.html'));
 		routeProvider.otherwise(new RouteMapping().set_redirectTo('/home'));
 	}
