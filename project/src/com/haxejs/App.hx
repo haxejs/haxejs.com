@@ -1,5 +1,6 @@
 package com.haxejs;
 
+import com.haxejs.Services.FeedServ;
 import ng.Angular;
 import ng.IRuns;
 import ng.NgCookies;
@@ -15,6 +16,7 @@ class App implements IRuns
 	public static function main() {
 		Configs.main();
 		Controllers.main();
+		Services.main();
 	}
 
 	//$rootScope can only be resolved in module run here
@@ -29,8 +31,8 @@ class App implements IRuns
 	//ui.router events:(broadcast)
 	//-- $stateNotFound,$stateChangeStart,$stateChangeSuccess,$stateChangeError,$viewContentLoading,
 	//-- $routeChangeStart,$routeChangeSuccess,$routeChangeError	
-	@:inject("$rootScope","$cookies","$location")
-	public static var appRun:Dynamic = function(rootScope:NgRootScope,cookies:NgCookies,location:NgLocation){
+	@:inject("$rootScope","$cookies","$location","feedServ")
+	public static var appRun:Dynamic = function(rootScope:NgRootScope,cookies:NgCookies,location:NgLocation,feedServ:FeedServ){
 		rootScope["loading"] = true;
 		rootScope.on("$locationChangeStart",function(event,newUrl,oldUrl){
 			rootScope["loading"] = true;

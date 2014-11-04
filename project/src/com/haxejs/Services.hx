@@ -48,7 +48,7 @@ class FeedServ {
 			seeds = window.localStorage.getItem("seeds")!=null?Json.parse(window.localStorage.getItem("seeds")):[];
 			return;
 		}
-		http.get("data/sources.json").success(function(data) {
+		http.get("http://picviewer.haxejs.com/data/sources.json").success(function(data) {
 			seeds = data;
 			try{window.localStorage.setItem("seeds",Json.stringify(seeds));}catch(e:Dynamic){}
 			rootScope.broadcast("seedUpdated", [seeds]);	
@@ -142,7 +142,7 @@ class FeedServ {
 	}
 	
 	private function parseIfeng(source:Feed) {
-		http.get("rss/"+source.id + ".xml").success(function(data) {
+		http.get("http://picviewer.haxejs.com/rss/"+source.id + ".xml").success(function(data) {
 			var channel = Xml.parse(data).firstElement().firstElement();
 			for (child in channel.elements()) {
 				if (child.nodeName == "description") source.description = child.firstChild().nodeValue;
