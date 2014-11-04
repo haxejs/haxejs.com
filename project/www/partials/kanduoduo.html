@@ -17,10 +17,10 @@
 			</ul>
 		</div>
       	<div class="col-md-9" role="picviewer">
-			<h1 align="center">{{photoEssaysCtrl.title()}}</h1>
+			<h1 align="center">{{photoEssaysCtrl.title}}</h1>
 			<p align="center">{{photoEssaysCtrl.signal()}}</p>
 			<hr class="half-rule"/>
-			<div ng-repeat="slide in photoEssaysCtrl.slides()">
+			<div ng-repeat="slide in photoEssaysCtrl.slides">
 				<img ng-src="{{slide.src}}" class="img-rounded" width="100%" alt="Photo Essays" />
 				<h4>{{slide.description}}</h4>
 			</div>

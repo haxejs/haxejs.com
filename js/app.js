@@ -1,4 +1,5 @@
 (function () { "use strict";
+var $estr = function() { return js.Boot.__string_rec(this,''); };
 function $extend(from, fields) {
 	function Inherit() {} Inherit.prototype = from; var proto = new Inherit();
 	for (var name in fields) proto[name] = fields[name];
@@ -56,7 +57,7 @@ Std.__name__ = ["Std"];
 Std.string = function(s) {
 	return js.Boot.__string_rec(s,"");
 };
-Std["int"] = function(x) {
+Std.int = function(x) {
 	return x | 0;
 };
 Std.parseInt = function(x) {
@@ -385,16 +386,21 @@ com.haxejs.AddressBookCtrl.prototype = $extend(ng.BaseCtrl.prototype,{
 	,__class__: com.haxejs.AddressBookCtrl
 });
 com.haxejs.PhotoEssaysCtrl = function(scope,feedServ) {
-	this.curItemIndex = 0;
-	this.curChannelID = "0";
 	var _g = this;
 	ng.BaseCtrl.call(this,scope);
 	this.feedServ = feedServ;
 	this.channels = feedServ.sources;
+	this.curChannelID = "0";
+	this.curItemIndex = 0;
 	this.curItems = feedServ.getHotest(200);
-	scope.$on("channelUpdated",function() {
+	this.refreshData();
+	scope.$on("playlistUpdated",function(event,args) {
 		_g.channels = feedServ.sources;
-		if(_g.curChannelID == "0") _g.curItems = feedServ.getHotest(200);
+		if(args[0].id == _g.channels[_g.channels.length - 1].id) {
+			if(_g.curChannelID == "0") _g.curItems = feedServ.getHotest(200);
+			_g.title = _g.curItems[_g.curItemIndex].title;
+			_g.slides = JSON.parse(_g.curItems[_g.curItemIndex].description);
+		}
 	});
 };
 com.haxejs.PhotoEssaysCtrl.__name__ = ["com","haxejs","PhotoEssaysCtrl"];
@@ -403,29 +409,24 @@ com.haxejs.PhotoEssaysCtrl.prototype = $extend(ng.BaseCtrl.prototype,{
 	getTotalUnreadNum: function() {
 		return this.feedServ.getHotest(200).length;
 	}
-	,curItem: function() {
-		if(this.curItems.length == 0) return null;
-		return this.curItems[this.curItemIndex];
-	}
-	,title: function() {
-		var item = this.curItem();
-		if(item == null) return "亲，出错了，我们正在努力捉虫中...";
-		return item.title;
+	,refreshData: function() {
+		if(this.curItems.length == 0) {
+			this.title = "请耐心等待，数据更新中...";
+			this.slides = [];
+			return;
+		}
+		this.title = this.curItems[this.curItemIndex].title;
+		this.slides = JSON.parse(this.curItems[this.curItemIndex].description);
 	}
 	,signal: function() {
-		var item = this.curItem();
-		if(item == null) return "";
+		if(this.curItems.length == 0) return "";
 		return "(" + (this.curItemIndex + 1) + "/" + this.curItems.length + ")";
-	}
-	,slides: function() {
-		var item = this.curItem();
-		if(item == null) return [];
-		return JSON.parse(item.description);
 	}
 	,chooseChannel: function(id) {
 		this.curChannelID = id;
 		if(id == "0") this.curItems = this.feedServ.getHotest(200); else this.curItems = this.feedServ.findSourceByID(id).items;
 		this.curItemIndex = 0;
+		this.refreshData();
 	}
 	,canPrev: function() {
 		return this.curItemIndex > 0;
@@ -435,9 +436,11 @@ com.haxejs.PhotoEssaysCtrl.prototype = $extend(ng.BaseCtrl.prototype,{
 	}
 	,doPrev: function() {
 		if(this.canPrev()) this.curItemIndex--;
+		this.refreshData();
 	}
 	,doNext: function() {
 		if(this.canNext()) this.curItemIndex++;
+		this.refreshData();
 	}
 	,__class__: com.haxejs.PhotoEssaysCtrl
 });
@@ -449,7 +452,7 @@ com.haxejs.SwitchLangCtrl.__name__ = ["com","haxejs","SwitchLangCtrl"];
 com.haxejs.SwitchLangCtrl.__super__ = ng.BaseCtrl;
 com.haxejs.SwitchLangCtrl.prototype = $extend(ng.BaseCtrl.prototype,{
 	changeLanguage: function(langKey) {
-		this.translate["use"](langKey);
+		this.translate.use(langKey);
 	}
 	,__class__: com.haxejs.SwitchLangCtrl
 });
@@ -518,7 +521,7 @@ com.haxejs.FeedServ.prototype = {
 			}
 			_g.lastSeedsUpdate = new Date().getTime();
 			try {
-				_g.window.localStorage.setItem("lastSeedsUpdate",_g.lastSeedsUpdate == null?"null":"" + _g.lastSeedsUpdate);
+				_g.window.localStorage.setItem("lastSeedsUpdate","" + _g.lastSeedsUpdate);
 			} catch( e1 ) {
 			}
 		});
@@ -592,10 +595,10 @@ com.haxejs.FeedServ.prototype = {
 			var unreads = source.items.filter(function(item) {
 				if(item.unread == 1 && item.pubDate > curTime) return true; else return false;
 			});
-			hots = hots.concat(unreads.slice(0,Std["int"](Math.min(unreads.length,5))));
+			hots = hots.concat(unreads.slice(0,Std.int(Math.min(unreads.length,5))));
 		}
 		haxe.ds.ArraySort.sort(hots,function(x,y) {
-			return Std["int"]((Math.isNaN(y.pubDate)?0:y.pubDate) - (Math.isNaN(x.pubDate)?0:x.pubDate));
+			return Std.int((Math.isNaN(y.pubDate)?0:y.pubDate) - (Math.isNaN(x.pubDate)?0:x.pubDate));
 		});
 		return hots;
 	}
@@ -1052,7 +1055,7 @@ haxe.xml.Parser.doParse = function(str,p,parent) {
 					var i;
 					if(s.charCodeAt(1) == 120) i = Std.parseInt("0" + HxOverrides.substr(s,1,s.length - 1)); else i = Std.parseInt(HxOverrides.substr(s,1,s.length - 1));
 					buf.add(String.fromCharCode(i));
-				} else if(!haxe.xml.Parser.escapes.exists(s)) buf.b += Std.string("&" + s + ";"); else buf.add(haxe.xml.Parser.escapes.get(s));
+				} else if(!haxe.xml.Parser.escapes.exists(s)) buf.b += "&" + s + ";"; else buf.add(haxe.xml.Parser.escapes.get(s));
 				start = p + 1;
 				state = next;
 			}

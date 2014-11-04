@@ -43,18 +43,32 @@ class SwitchLangCtrl extends BaseCtrl{
 class PhotoEssaysCtrl extends BaseCtrl {
 	private var feedServ:FeedServ;
 	public var channels:Array<Feed>;
-	public var curChannelID:String = "0";
+	public var curChannelID:String;
 	private var curItems:Array<Item>;
-	public var curItemIndex:Int = 0;
+	public var curItemIndex:Int;
+	public var title:String;
+	public var slides:Array<{}>;
 	
 	public function new(scope:NgScope,feedServ:FeedServ) {
 		super(scope);
 		this.feedServ = feedServ;
 		this.channels = feedServ.sources;
-		this.curItems = feedServ.getHotest(200);		
-		scope.on("channelUpdated", function() {
+		this.curChannelID = "0";
+		this.curItemIndex = 0;
+		this.curItems = feedServ.getHotest(200);
+		this.refreshData();	
+		// scope.on("channelUpdated", function() {
+		// 	this.channels = feedServ.sources;
+		// 	if (curChannelID=="0") this.curItems = feedServ.getHotest(200);
+		// });
+		scope.on("playlistUpdated",function(event,args){
 			this.channels = feedServ.sources;
-			if (curChannelID=="0") this.curItems = feedServ.getHotest(200);
+
+			if (args[0].id == channels[channels.length -1].id) {
+				if (curChannelID=="0") this.curItems = feedServ.getHotest(200);
+				title = curItems[curItemIndex].title;
+				slides = Json.parse(curItems[curItemIndex].description);
+			}
 		});
 	}
 	
@@ -62,27 +76,19 @@ class PhotoEssaysCtrl extends BaseCtrl {
 		return feedServ.getHotest(200).length;
 	}
 	
-	private function curItem():Item {
-		if (curItems.length == 0) return null;
-		return curItems[curItemIndex];
-	}
-	
-	public function title():String {
-		var item = curItem();
-		if (item == null) return "亲，出错了，我们正在努力捉虫中...";
-		return item.title;
+	private function refreshData():Void {
+		if (curItems.length == 0) {
+			title = "请耐心等待，数据更新中...";
+			slides = [];
+			return;
+		}
+		title = curItems[curItemIndex].title;
+		slides = Json.parse(curItems[curItemIndex].description);
 	}
 	
 	public function signal():String {
-		var item = curItem();
-		if (item == null) return "";
+		if (curItems.length == 0) return "";
 		return "("+(curItemIndex + 1) + "/" + curItems.length+")";
-	}
-	
-	public function slides():Array<{}> {
-		var item = curItem();
-		if (item == null) return [];
-		return Json.parse(item.description);
 	}
 	
 	public function chooseChannel(id:String):Void {
@@ -93,6 +99,7 @@ class PhotoEssaysCtrl extends BaseCtrl {
 			curItems = feedServ.findSourceByID(id).items;
 			
 		curItemIndex = 0;
+		refreshData();
 	}
 	
 	public function canPrev():Bool {
@@ -105,10 +112,12 @@ class PhotoEssaysCtrl extends BaseCtrl {
 	
 	public function doPrev():Void {
 		if (canPrev()) curItemIndex--;
+		refreshData();
 	}
 	
 	public function doNext():Void {
 		if (canNext()) curItemIndex++;
+		refreshData();
 	}
 }
 
