@@ -22,7 +22,7 @@ class Controllers implements IControllers
 	@:inject("$scope")
 	public static var addressBookCtrl:Dynamic = AddressBookCtrl;
 	
-	@:inject("$scope","feedServ")
+	@:inject("$scope","feedServ","$document")
 	public static var photoEssaysCtrl:Dynamic = PhotoEssaysCtrl;
 }
 
@@ -41,16 +41,18 @@ class SwitchLangCtrl extends BaseCtrl{
 }
 
 class PhotoEssaysCtrl extends BaseCtrl {
+	private var document:NgDocument;
 	private var feedServ:FeedServ;
 	public var channels:Array<Feed>;
 	public var curChannelID:String;
 	private var curItems:Array<Item>;
 	public var curItemIndex:Int;
 	public var title:String;
-	public var slides:Array<{}>;
+	public var slides:Array<{src:String,description:String}>;
 	
-	public function new(scope:NgScope,feedServ:FeedServ) {
+	public function new(scope:NgScope,feedServ:FeedServ,document:NgDocument) {
 		super(scope);
+		this.document = document;
 		this.feedServ = feedServ;
 		this.channels = feedServ.sources;
 		this.curChannelID = "0";
@@ -68,6 +70,7 @@ class PhotoEssaysCtrl extends BaseCtrl {
 				if (curChannelID=="0") this.curItems = feedServ.getHotest(200);
 				title = curItems[curItemIndex].title;
 				slides = Json.parse(curItems[curItemIndex].description);
+				document.find("#description").attr("content", title+"--"+slides[0].description);
 			}
 		});
 	}
@@ -84,6 +87,7 @@ class PhotoEssaysCtrl extends BaseCtrl {
 		}
 		title = curItems[curItemIndex].title;
 		slides = Json.parse(curItems[curItemIndex].description);
+		document.find("#description").attr("content", title+"--"+slides[0].description);
 	}
 	
 	public function signal():String {

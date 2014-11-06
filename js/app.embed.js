@@ -385,9 +385,10 @@ com.haxejs.AddressBookCtrl.prototype = $extend(ng.BaseCtrl.prototype,{
 	}
 	,__class__: com.haxejs.AddressBookCtrl
 });
-com.haxejs.PhotoEssaysCtrl = function(scope,feedServ) {
+com.haxejs.PhotoEssaysCtrl = function(scope,feedServ,document) {
 	var _g = this;
 	ng.BaseCtrl.call(this,scope);
+	this.document = document;
 	this.feedServ = feedServ;
 	this.channels = feedServ.sources;
 	this.curChannelID = "0";
@@ -400,6 +401,7 @@ com.haxejs.PhotoEssaysCtrl = function(scope,feedServ) {
 			if(_g.curChannelID == "0") _g.curItems = feedServ.getHotest(200);
 			_g.title = _g.curItems[_g.curItemIndex].title;
 			_g.slides = JSON.parse(_g.curItems[_g.curItemIndex].description);
+			document.find("#description").attr("content",_g.title + "--" + _g.slides[0].description);
 		}
 	});
 };
@@ -417,6 +419,7 @@ com.haxejs.PhotoEssaysCtrl.prototype = $extend(ng.BaseCtrl.prototype,{
 		}
 		this.title = this.curItems[this.curItemIndex].title;
 		this.slides = JSON.parse(this.curItems[this.curItemIndex].description);
+		this.document.find("#description").attr("content",this.title + "--" + this.slides[0].description);
 	}
 	,signal: function() {
 		if(this.curItems.length == 0) return "";
@@ -475,7 +478,7 @@ com.haxejs.Controllers.main = function() {
 		if(window.hxdeps) deps = window.hxdeps; else deps = [];
 		ng.Angular.module("com.haxejs",deps);
 	}
-	com.haxejs.Controllers.photoEssaysCtrl.$inject = ["$scope","feedServ"];
+	com.haxejs.Controllers.photoEssaysCtrl.$inject = ["$scope","feedServ","$document"];
 	com.haxejs.Controllers.addressBookCtrl.$inject = ["$scope"];
 	com.haxejs.Controllers.twoWayBindingCtrl.$inject = ["$scope"];
 	com.haxejs.Controllers.switchLangCtrl.$inject = ["$scope","$translate"];
