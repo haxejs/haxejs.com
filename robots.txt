@@ -3,4 +3,4 @@
 # Allow crawling of all content
 User-agent: *
 Disallow:
-Sitemap: http://haxejs.com/sitemap.xml
+Sitemap: http://www.haxejs.com/sitemap.xml
