@@ -8,3 +8,4 @@ project/www/js
 tmp
 .DS_Store
 .idea
+_site
