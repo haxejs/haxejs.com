@@ -2,6 +2,8 @@
 layout: post_zh
 title: Hello world
 description: This is my first blog entry
+date: "2014-11-21 15:12:52 +0800"
+author: kmshi
 categories: [zh]
 ---
 <h2>{{ page.title }}</h2>
