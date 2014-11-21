@@ -7,6 +7,6 @@ description: 让我们一起谈谈HTML5,Haxe,Angular,Cordova,Openfl与NodeJS吧.
 <h2>全部中文文章</h2>
 <ul>
     {% for post in site.categories.zh %}
-    <li><a href="{{ post.url }}">[{{ post.date | date:  "%Y-%m-%d"  }}] -- {{ post.title }}</a></li>
+    <li><a href="{{ post.url }}">{{ post.title }}({{ post.date | date:  "%Y-%m-%d"  }})</a></li>
     {% endfor %}
 </ul>
