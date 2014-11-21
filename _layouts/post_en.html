@@ -12,6 +12,7 @@ layout: default_en
 	      {{ page.author }}
 	    </a>
 	  </div>
+	  <hr>
 	  <div class="post-content">
 	    {{ content }}
 	  </div>
@@ -21,7 +22,7 @@ layout: default_en
 	<h4>All posts in english</h4>
     <ul class="nav bs-docs-sidenav">
         {% for post in site.categories.en %}
-	    <li><a href="{{ post.url }}" {% if page.url==post.url %}active{% endif %}>{{ post.title }}</a></li>
+	    <li><a href="{{ post.url }}" {% if page.url == post.url %}active{% endif %}>{{ post.title }}</a></li>
 	    {% endfor %}
 	</ul>
 </div>
