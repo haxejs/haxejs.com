@@ -7,7 +7,7 @@ layout: default_en
 	    <span class="post-date">
 	      {{ page.date | date_to_string }}
 	    </span>
-	    <a href="https://github.com/{{ post.author }}" class="post-author">
+	    <a href="https://github.com/{{ page.author }}" class="post-author">
 	      <img src="https://github.com/{{ page.author }}.png" class="avatar" alt="{{ page.author }}" width="24" height="24">
 	      {{ page.author }}
 	    </a>
@@ -22,7 +22,7 @@ layout: default_en
 	<h4>All posts in english</h4>
     <ul class="nav bs-docs-sidenav">
         {% for post in site.categories.en %}
-	    <li><a href="{{ post.url }}" {% if page.url == post.url %}active{% endif %}>{{ post.title }}</a></li>
+	    <li><a href="{{ post.url }}" {% if page.url == post.url %}active="active"{% endif %}>{{ post.title }}</a></li>
 	    {% endfor %}
 	</ul>
 </div>
