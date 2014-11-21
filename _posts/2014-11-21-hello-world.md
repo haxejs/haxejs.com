@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Hello world
+description: This is my first blog entry
 ---
 <h2>{{ page.title }}</h2>
 <p>{{ page.date | date_to_string }}</p>

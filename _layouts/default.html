@@ -1,10 +1,99 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta charset="utf-8">
+	<meta name="fragment" content="!">
+    <meta name="baidu-site-verification" content="7ehjwgF1qH">
+    <meta property="wb:webmaster" content="151aad792508f12d" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" id="description" content="{{ page.description }}">
+    <meta name="keywords" content="Haxejs, Haxe, Mobile, Angular, Angularjs,Ionic,HTML5, Dart,Polymer, JS, JavaScript, framework, bootstrap, front-end, frontend, web development">
+    <meta name="author" content="Richard Shi, and Haxejs contributors">
     <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
+    <!-- Bootstrap core CSS -->
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Documentation extras -->
+    <link href="css/docs.min.css" rel="stylesheet">
 </head>
-<body>
+<body class="bs-docs-home">
+    <!-- Docs master nav -->
+    <header class="navbar navbar-static-top bs-docs-nav" id="top" role="banner">
+      <div class="container">
+        <div class="navbar-header">
+          <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a href="#!/home" class="navbar-brand"><span class="glyphicon glyphicon-leaf"></span>Haxejs</a>
+        </div>
+        <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+
+          <ul class="nav navbar-nav">   
+            <!--                   
+            <li><a href="#!/understand" translate="UNDERSTAND_TITLE"></a></li>
+            <li><a href="#!/getstarted" translate="GETSTARTED_TITLE"></a></li>
+            <li><a href="#!/kanduoduo" translate="KANDUODUO_TITLE"></a></li>
+            <li><a href="#!/showcase"   translate="SHOWCASE_TITLE"></a></li>
+            -->
+          </ul>
+        <!--
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="http://demo.haxejs.com" >Demo</a></li>
+            <li><a href="http://forum.haxejs.com" >Forum</a></li>
+          </ul>
+        -->
+          <ul class="nav navbar-nav navbar-right" ng-controller="switchLangCtrl">
+            <li><a ng-click="switchLangCtrl.changeLanguage('zh')" translate="BUTTON_TEXT_ZH"></a></li>
+            <li><a ng-click="switchLangCtrl.changeLanguage('en')" translate="BUTTON_TEXT_EN"></a></li>
+          </ul>        
+        </nav>
+      </div>
+    </header>
+
+    <div class="bs-docs-header" id="content">
+      <div class="container">
+        <h1>{{ page.title }}</h1>
+        <p>{{ page.description }}</p>
+      </div>
+    </div>
+
     {{ content }}
+
+    <!-- Footer -->
+    <footer class="bs-docs-footer" role="contentinfo">
+      <div class="container">
+		<!--
+        <div class="bs-docs-social">
+          <ul class="bs-docs-social-buttons">
+            <li>
+              <iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=haxejs&amp;repo=haxejs-angular&amp;type=watch&amp;count=true" width="100" height="20" title="Star on GitHub"></iframe>
+            </li>
+            <li>
+              <iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=haxejs&amp;repo=haxejs-angular&amp;type=fork&amp;count=true" width="102" height="20" title="Fork on GitHub"></iframe>
+            </li>
+          </ul>
+        </div>
+		-->
+
+        <p>This website is created with haxejs-angular by the <a href="https://github.com/haxejs?tab=members">core team</a> with the help of <a href="https://github.com/haxejs/haxejs-angular/graphs/contributors">our contributors</a>.</p>
+        <p>Code licensed under <a href="https://github.com/haxejs/haxejs-angular/blob/master/LICENSE" target="_blank">MIT</a>, documentation under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>
+        <ul class="bs-docs-footer-links muted">
+        <!--
+          <li><a href="https://github.com/haxejs/haxejs-angular">GitHub</a></li>
+          <li>&middot;</li>
+          <li><a href="http://demo.haxejs.com">Demo</a></li>
+          <li>&middot;</li>
+          <li><a href="http://forum.haxejs.com">Forum</a></li>
+          <li>&middot;</li>
+          <li translate="BEIAN"></li>
+        -->          
+        </ul>
+      </div>
+    </footer>    
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
 </html>
