@@ -1,5 +1,5 @@
 markdown: rdiscount
 highlighter: pygments
-permalink: blog/:title
+permalink: blog/:categories/:title
 
 title: HaxeJS
