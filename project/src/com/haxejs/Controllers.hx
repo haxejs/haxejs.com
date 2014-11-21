@@ -29,14 +29,17 @@ class Controllers implements IControllers
 //use class/type as controller model
 class SwitchLangCtrl extends BaseCtrl{
 	private var translate:NgTranslate;
+	public var blogPath:String;
 
 	public function new(scope:NgScope,translate:NgTranslate){
 		super(scope);
 		this.translate = translate;
+		blogPath = "/blog/" + translate.preferredLanguage() + "/";
 	}
 
 	public function changeLanguage(langKey:String):Void{
 		translate.use(langKey);
+		blogPath = "/blog/" + langKey + "/";
 	}
 }
 

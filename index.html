@@ -94,12 +94,13 @@
           </button>
           <a href="#!/home" class="navbar-brand"><span class="glyphicon glyphicon-leaf"></span>Haxejs</a>
         </div>
-        <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+        <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation" ng-controller="switchLangCtrl">
 
           <ul class="nav navbar-nav">            
             <li><a href="#!/understand" translate="UNDERSTAND_TITLE"></a></li>
             <li><a href="#!/getstarted" translate="GETSTARTED_TITLE"></a></li>
             <li><a href="#!/kanduoduo" translate="KANDUODUO_TITLE"></a></li>
+            <li><a ng-href="{{switchLangCtrl.blogPath}}" translate="BLOG_TITLE"></a></li>
             <!--
             <li><a href="#!/showcase"   translate="SHOWCASE_TITLE"></a></li>
             -->
@@ -110,7 +111,7 @@
             <li><a href="http://forum.haxejs.com" >Forum</a></li>
           </ul>
         -->
-          <ul class="nav navbar-nav navbar-right" ng-controller="switchLangCtrl">
+          <ul class="nav navbar-nav navbar-right">
             <li><a ng-click="switchLangCtrl.changeLanguage('zh')" translate="BUTTON_TEXT_ZH"></a></li>
             <li><a ng-click="switchLangCtrl.changeLanguage('en')" translate="BUTTON_TEXT_EN"></a></li>
           </ul>        

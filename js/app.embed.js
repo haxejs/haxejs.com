@@ -1,5 +1,4 @@
 (function () { "use strict";
-var $estr = function() { return js.Boot.__string_rec(this,''); };
 function $extend(from, fields) {
 	function Inherit() {} Inherit.prototype = from; var proto = new Inherit();
 	for (var name in fields) proto[name] = fields[name];
@@ -57,7 +56,7 @@ Std.__name__ = ["Std"];
 Std.string = function(s) {
 	return js.Boot.__string_rec(s,"");
 };
-Std.int = function(x) {
+Std["int"] = function(x) {
 	return x | 0;
 };
 Std.parseInt = function(x) {
@@ -450,12 +449,14 @@ com.haxejs.PhotoEssaysCtrl.prototype = $extend(ng.BaseCtrl.prototype,{
 com.haxejs.SwitchLangCtrl = function(scope,translate) {
 	ng.BaseCtrl.call(this,scope);
 	this.translate = translate;
+	this.blogPath = "/blog/" + translate.preferredLanguage() + "/";
 };
 com.haxejs.SwitchLangCtrl.__name__ = ["com","haxejs","SwitchLangCtrl"];
 com.haxejs.SwitchLangCtrl.__super__ = ng.BaseCtrl;
 com.haxejs.SwitchLangCtrl.prototype = $extend(ng.BaseCtrl.prototype,{
 	changeLanguage: function(langKey) {
-		this.translate.use(langKey);
+		this.translate["use"](langKey);
+		this.blogPath = "/blog/" + langKey + "/";
 	}
 	,__class__: com.haxejs.SwitchLangCtrl
 });
@@ -524,7 +525,7 @@ com.haxejs.FeedServ.prototype = {
 			}
 			_g.lastSeedsUpdate = new Date().getTime();
 			try {
-				_g.window.localStorage.setItem("lastSeedsUpdate","" + _g.lastSeedsUpdate);
+				_g.window.localStorage.setItem("lastSeedsUpdate",_g.lastSeedsUpdate == null?"null":"" + _g.lastSeedsUpdate);
 			} catch( e1 ) {
 			}
 		});
@@ -598,10 +599,10 @@ com.haxejs.FeedServ.prototype = {
 			var unreads = source.items.filter(function(item) {
 				if(item.unread == 1 && item.pubDate > curTime) return true; else return false;
 			});
-			hots = hots.concat(unreads.slice(0,Std.int(Math.min(unreads.length,5))));
+			hots = hots.concat(unreads.slice(0,Std["int"](Math.min(unreads.length,5))));
 		}
 		haxe.ds.ArraySort.sort(hots,function(x,y) {
-			return Std.int((Math.isNaN(y.pubDate)?0:y.pubDate) - (Math.isNaN(x.pubDate)?0:x.pubDate));
+			return Std["int"]((Math.isNaN(y.pubDate)?0:y.pubDate) - (Math.isNaN(x.pubDate)?0:x.pubDate));
 		});
 		return hots;
 	}
@@ -1058,7 +1059,7 @@ haxe.xml.Parser.doParse = function(str,p,parent) {
 					var i;
 					if(s.charCodeAt(1) == 120) i = Std.parseInt("0" + HxOverrides.substr(s,1,s.length - 1)); else i = Std.parseInt(HxOverrides.substr(s,1,s.length - 1));
 					buf.add(String.fromCharCode(i));
-				} else if(!haxe.xml.Parser.escapes.exists(s)) buf.b += "&" + s + ";"; else buf.add(haxe.xml.Parser.escapes.get(s));
+				} else if(!haxe.xml.Parser.escapes.exists(s)) buf.b += Std.string("&" + s + ";"); else buf.add(haxe.xml.Parser.escapes.get(s));
 				start = p + 1;
 				state = next;
 			}
