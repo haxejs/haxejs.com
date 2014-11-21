@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: default_zh
 title: Hello world
 description: This is my first blog entry
 categories: [zh]
