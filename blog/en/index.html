@@ -1,12 +1,14 @@
 ---
 layout: default_en
 title: Blog in English
+description: Let us talk a little about HTML5,Haxe,Angular,Cordova,OpenFL and NodeJS.
 permalink: /blog/en/
 author: all
 ---
 <h2>All posts in english</h2>
 <ul>
     {% for post in site.categories.en %}
-    <li><a href="{{ post.url }}">{{ post.title }}({{ post.date | date:  "%Y-%m-%d"  }})</a></li>
+    <li><a href="{{ post.url }}">{{ post.title }}({{ post.date | date:  "%Y-%m-%d"  }})</a>
+    <p>{{ post.description }}</p></li>
     {% endfor %}
 </ul>
