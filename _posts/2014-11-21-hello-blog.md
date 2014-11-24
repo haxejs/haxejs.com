@@ -25,17 +25,17 @@ categories: [zh]
 - 国外的博客网站，如google blogger等，以及google app engine + micolog等，因咱们天朝的GFW，用户体验无法保障
 
 - Wordpress
-1. 自己以前用过，安装简单，插件齐全
-2. 需PHP运行环境与数据库环境，不管是用SAE还是云主机，都会有一定的费用
+	1. 自己以前用过，安装简单，插件齐全
+	2. 需PHP运行环境与数据库环境，不管是用SAE还是云主机，都会有一定的费用
 
 - NodeBB，定制一个页面，有些api通过HTTP RESTful，有些又通过websocket，而且数据又混杂style在其内，不喜。
 
 - Jekyll on Github Pages
-1. 真正的免费，www.haxejs.com也在Github上
-2. 可直接在Github网页上使用markdown语法修改或写文章，且有版本管理之优势
-3. 静态化，可迁移部署到任何简单的web site上（比如github被咱们天朝的GFW封了）
-4. 基本支持中、英文与各自讨论环境（加上Disqus）
-5. 流量靠内容、读者与时间积累了
+	1. 真正的免费，www.haxejs.com也在Github上
+	2. 可直接在Github网页上使用markdown语法修改或写文章，且有版本管理之优势
+	3. 静态化，可迁移部署到任何简单的web site上（比如github被咱们天朝的GFW封了）
+	4. 基本支持中、英文与各自讨论环境（加上Disqus）
+	5. 流量靠内容、读者与时间积累了
 
 
 #实施步骤
