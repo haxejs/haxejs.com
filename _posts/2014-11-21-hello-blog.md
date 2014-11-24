@@ -20,6 +20,7 @@ categories: [zh]
 	1. 技术类博客网站（集贸），马上有流量，有读者，有关注，有交流，有推荐
 	2. 不支持自定义域名，不能有中、英文独立的讨论环境
 
+
 - 国内的轻博客，如点点网，Lofter，国外的tumblr，支持自定义域名，但是偏文艺、艺术类（图片冲击）为主的社区，不太适合咱Geek style
 
 - 国外的博客网站，如google blogger等，以及google app engine + micolog等，因咱们天朝的GFW，用户体验无法保障
@@ -27,6 +28,7 @@ categories: [zh]
 - Wordpress
 	1. 自己以前用过，安装简单，插件齐全
 	2. 需PHP运行环境与数据库环境，不管是用SAE还是云主机，都会有一定的费用
+
 
 - NodeBB，定制一个页面，有些api通过HTTP RESTful，有些又通过websocket，而且数据又混杂style在其内，不喜。
 
