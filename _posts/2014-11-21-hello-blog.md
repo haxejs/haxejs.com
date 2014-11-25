@@ -5,6 +5,7 @@ description: 我的博客需求、选项、与实施
 date: "2014-11-21 15:12:52 +0800"
 author: kmshi
 categories: [zh]
+keywords: haxe, javascript, js, html5, angular
 ---
 一直想为这个网站加一个博客，今天终于有了我为这个网站发的第一篇文章了。
 
