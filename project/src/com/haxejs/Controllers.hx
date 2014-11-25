@@ -13,7 +13,7 @@ class Controllers implements IControllers
     public static function main(){
     }
 
-	@:inject("$scope","$translate")
+	@:inject("$scope","$translate","$location")
 	public static var switchLangCtrl:Dynamic = SwitchLangCtrl;
 	
 	@:inject("$scope")
@@ -31,10 +31,14 @@ class SwitchLangCtrl extends BaseCtrl{
 	private var translate:NgTranslate;
 	public var blogPath:String;
 
-	public function new(scope:NgScope,translate:NgTranslate){
+	public function new(scope:NgScope,translate:NgTranslate,location:NgLocation){
 		super(scope);
 		this.translate = translate;
 		blogPath = "/blog/" + translate.preferredLanguage() + "/";
+		//so blog can pass lang back
+		var url:String = location.absUrl();
+		if (url.indexOf("?lang=en") > -1) changeLanguage("en");
+		if (url.indexOf("?lang=zh") > -1) changeLanguage("zh");
 	}
 
 	public function changeLanguage(langKey:String):Void{
