@@ -10,6 +10,7 @@ keywords: haxe, javascript, js, html5, angular, cordova, openfl, nodejs
 
 #The problems of current haxejs-angular?
 haxejs-angular can help you manage js library dependencies automatically in 2 ways:
+
 - copy the js library files you need to www/bower_components folder,so you can reference them in html by script tags.
 - compile code with all libraries you need into a single file by using embed_js flag
 
@@ -19,6 +20,7 @@ It is a pity that the embed way does not work all the time, some libraries can n
 In node env, we like its module dependencies system: require("module name").
 Is it possible to do same in browser env? Yes, [requirejs](http://www.requirejs.org/) comes to save world!
 And some smart guys had already experiment a lot:
+
 - blog:http://www.startersquad.com/blog/angularjs-requirejs/
 - example:https://github.com/StarterSquad/ngseed
 
