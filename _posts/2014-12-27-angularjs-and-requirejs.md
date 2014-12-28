@@ -21,8 +21,8 @@ In node env, we like its module dependencies system: require("module name").
 Is it possible to do same in browser env? Yes, [requirejs](http://www.requirejs.org/) comes to save world!
 And some smart guys had already experiment a lot:
 
-- blog:http://www.startersquad.com/blog/angularjs-requirejs/
-- example:https://github.com/StarterSquad/ngseed
+- blog:[http://www.startersquad.com/blog/angularjs-requirejs/](http://www.startersquad.com/blog/angularjs-requirejs/)
+- example:[https://github.com/StarterSquad/ngseed](https://github.com/StarterSquad/ngseed)
 
 #ToDo
 - improve haxejs libraries

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="com.haxejs" id="ng-app">
+<html lang="en">
   <head>
     <!-- Meta, title, CSS, favicons, etc. -->
     <meta charset="utf-8">
@@ -155,16 +155,19 @@
       </div>
     </footer>
 
-    <!-- Include all compiled plugins (below), or include individual files as needed        
+    <!-- Include all compiled plugins (below), or include individual files as needed
+        <script src="bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="js/app.embed.js"></script>        
     --> 
-	  <script src="bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="js/app.embed.js"></script>
+
     <!-- Bootstrap js plugins if we use bootstrap components, however, it is not angular native style, 
     please use haxejs-angular-bootstrap if IE9 and above support is prefered.
         <script src="js/docs.min.js"></script>
-    --> 
+    -->
+    <!--
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 	  <script src="bower_components/ng-grid/ng-grid-2.0.12.min.js"></script>
-
+    -->
+    <script src="bower_components/requirejs/require.js" data-main="js/config"></script>
   </body>
 </html>
