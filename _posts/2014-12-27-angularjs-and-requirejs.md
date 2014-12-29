@@ -123,6 +123,7 @@ require(['angular','jquery',
 
 ###3.Generate file with optimize or without optimize
 > r.js -o build.js
+
 > r.js -o build.js optimize=none
 
 ###4.Modify index.html to only include the single script file:
