@@ -114,7 +114,21 @@ require(['angular','jquery',
 		"requireLib":"bower_components/requirejs/require",
         "app":"js/app"
     },
-
+    shim: {
+    	"angular-cookies":{deps: ['angular']},
+    	"angular-route":{deps: ['angular']},
+    	"angular-translate":{deps: ['angular']},
+    	"angular-translate-handler-log":{deps: ['angular-translate']},
+    	"angular-translate-storage-local":{deps: ['angular-translate']},
+    	"angular-translate-storage-cookie":{deps: ['angular-translate']},
+    	"angular-translate-loader-url":{deps: ['angular-translate']},
+    	"angular-translate-loader-static-files":{deps: ['angular-translate']},
+    	"bootstrap":{deps: ['jquery']},
+    	"ng-grid":{deps: ['angular']},
+    	"angular":{exports:'angular',deps: ['jquery']},
+		"jquery":{exports:'jquery'},
+    	"app":{deps: ['angular']}
+    },
 	include:"requireLib",
 	name:"js/config",
 	out:"www/js/app-compiled.js"
