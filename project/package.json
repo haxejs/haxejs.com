@@ -18,6 +18,7 @@
   , "dependencies": {
     "protractor":"",
     "karma":"",
+    "requirejs":"",
     "karma-chrome-launcher": "",
     "karma-safari-launcher": "",
     "karma-firefox-launcher": "",

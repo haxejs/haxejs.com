@@ -4,14 +4,10 @@
 -lib haxejs-angular
 
 --next
--cp src
--js www/js/app.embed.js
--main com.haxejs.App
--lib haxejs-angular
--D embed_js
--cmd "java -jar yuicompressor-2.4.8.jar -o www/js/app.embed.min.js www/js/app.embed.js"
+-cmd "node node_modules/requirejs/bin/r.js -o build.js"
+-cmd "rm -f ../index.html"
 -cmd "cp -R www/*  ../"
--cmd "sed -i 's/app.embed.js/app.embed.min.js/g' ../index.html"
+-cmd "sed -i 's/bower_components\/requirejs\/require.js/js\/app-compiled.js/g' ../index.html"
 
 --next
 -cp src
