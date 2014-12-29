@@ -24,9 +24,9 @@ And some smart guys had already experiment a lot:
 - blog:[http://www.startersquad.com/blog/angularjs-requirejs/](http://www.startersquad.com/blog/angularjs-requirejs/)
 - example:[https://github.com/StarterSquad/ngseed](https://github.com/StarterSquad/ngseed)
 
-#Use AMD(requirejs) way to rewrite haxejs.com app(site)
+#Rewrite haxejs.com app by AMD(requirejs) way
 
-##Modify index.html
+###1.Modify index.html
 
 * Remove ng-app attribute to bootstrap app from code
 * Commment or remove all script tags
@@ -36,7 +36,7 @@ And some smart guys had already experiment a lot:
   <script src="bower_components/requirejs/require.js" data-main="js/config"></script>
 ```
 
-##Add js/config.js
+###2.Add js/config.js
 
 ```
 require.config({
@@ -85,14 +85,14 @@ require(['angular','jquery',
 
 ```
 
-##Run it, it should work as expected.
+###3.Run it, it should work as expected.
 
 #Use requirejs optimizer tool to combine all related scripts together and minifies them to one single file
 
-##Install optimizer tool
+###1.Install optimizer tool
 > npm install -g requirejs
 
-##Add build profile -- build.js
+###2.Add build profile -- build.js
 
 ```
 ({
@@ -121,11 +121,11 @@ require(['angular','jquery',
 })
 ```
 
-##Generate file with optimize or without optimize
+###3.Generate file with optimize or without optimize
 > r.js -o build.js
 > r.js -o build.js optimize=none
 
-##Modify index.html to only include the single script file:
+###4.Modify index.html to only include the single script file:
 change
 
 ```
@@ -138,6 +138,6 @@ to
 ```
 
 #ToDo
-- improve haxejs libraries
-- change haxejs.github.io and other showcase apps
+- improve haxejs libraries to try to automatically generate requirejs config and build profile files.
+
 
