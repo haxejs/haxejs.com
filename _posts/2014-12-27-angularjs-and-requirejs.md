@@ -31,11 +31,13 @@ And some smart guys had already experiment a lot:
 * Remove ng-app attribute to bootstrap app from code
 * Commment or remove all script tags
 * Add the following script tag near the end of body:
+
 ```
-<script src="bower_components/requirejs/require.js" data-main="js/config"></script>
+  <script src="bower_components/requirejs/require.js" data-main="js/config"></script>
 ```
 
 ##Add js/config.js
+
 ```
 require.config({
 	baseUrl: './',
@@ -91,6 +93,7 @@ require(['angular','jquery',
 > npm install -g requirejs
 
 ##Add build profile -- build.js
+
 ```
 ({
 	baseUrl: './www/',
@@ -124,10 +127,12 @@ require(['angular','jquery',
 
 ##Modify index.html to only include the single script file:
 change
+
 ```
  <script src="bower_components/requirejs/require.js" data-main="js/config"></script>
 ```
 to
+
 ```
  <script src="js/app-compiled.js"></script>
 ```
