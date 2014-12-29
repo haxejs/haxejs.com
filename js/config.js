@@ -1,5 +1,6 @@
 require.config({
 	baseUrl: './',
+    waitSeconds:0,//disable timeout
     paths: {
         "angular": 'bower_components/angular/angular',
         "angular-cookies":'bower_components/angular-cookies/angular-cookies',
@@ -38,6 +39,5 @@ require(['angular','jquery',
 	'angular-translate-storage-local','angular-translate-storage-cookie',
 	'angular-translate-loader-url','angular-translate-loader-static-files',
 	'angular-translate-handler-log','ng-grid','app'], function(angular) {
-
 		angular.bootstrap(document,["com.haxejs"]);
 });
