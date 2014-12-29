@@ -24,6 +24,108 @@ And some smart guys had already experiment a lot:
 - blog:[http://www.startersquad.com/blog/angularjs-requirejs/](http://www.startersquad.com/blog/angularjs-requirejs/)
 - example:[https://github.com/StarterSquad/ngseed](https://github.com/StarterSquad/ngseed)
 
+#Use AMD(requirejs) way to rewrite haxejs.com app(site)
+
+##Modify index.html
+
+* Remove ng-app attribute to bootstrap app from code
+* Commment or remove all script tags
+* Add the following script tag near the end of body:
+>  <script src="bower_components/requirejs/require.js" data-main="js/config"></script>
+
+##Add js/config.js
+```
+require.config({
+	baseUrl: './',
+    paths: {
+        "angular": 'bower_components/angular/angular',
+        "angular-cookies":'bower_components/angular-cookies/angular-cookies',
+        "angular-route":'bower_components/angular-route/angular-route',
+        "angular-translate":'bower_components/angular-translate/angular-translate',
+        "angular-translate-handler-log":'bower_components/angular-translate-handler-log/angular-translate-handler-log',
+        "angular-translate-loader-static-files":'bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files',
+        "angular-translate-loader-url":'bower_components/angular-translate-loader-url/angular-translate-loader-url',
+        "angular-translate-storage-cookie":'bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie',
+        "angular-translate-storage-local":'bower_components/angular-translate-storage-local/angular-translate-storage-local',
+        "bootstrap":'bower_components/bootstrap/dist/js/bootstrap',
+        "jquery":'bower_components/jquery/dist/jquery',
+        "ng-grid":'bower_components/ng-grid/ng-grid-2.0.12.debug',
+        "app":"js/app"
+    },
+    shim: {
+    	"angular-cookies":{deps: ['angular']},
+    	"angular-route":{deps: ['angular']},
+    	"angular-translate":{deps: ['angular']},
+    	"angular-translate-handler-log":{deps: ['angular-translate']},
+    	"angular-translate-storage-local":{deps: ['angular-translate']},
+    	"angular-translate-storage-cookie":{deps: ['angular-translate']},
+    	"angular-translate-loader-url":{deps: ['angular-translate']},
+    	"angular-translate-loader-static-files":{deps: ['angular-translate']},
+    	"bootstrap":{deps: ['jquery']},
+    	"ng-grid":{deps: ['angular']},
+    	"angular":{exports:'angular',deps: ['jquery']},
+		"jquery":{exports:'jquery'},
+    	"app":{deps: ['angular']}
+    }
+});
+
+require(['angular','jquery',
+	'bootstrap','angular-cookies',
+	'angular-route','angular-translate',
+	'angular-translate-storage-local','angular-translate-storage-cookie',
+	'angular-translate-loader-url','angular-translate-loader-static-files',
+	'angular-translate-handler-log','ng-grid','app'], function(angular) {
+
+		angular.bootstrap(document,["com.haxejs"]);
+});
+
+```
+
+##Run it, it should work as expected.
+
+#Use requirejs optimizer tool to combine all related scripts together and minifies them to one single file
+
+##Install optimizer tool
+> npm install -g requirejs
+
+##Add build profile -- build.js
+```
+({
+	baseUrl: './www/',
+    paths: {
+		//exclude modules -- "module":'empty:',
+        "angular": 'bower_components/angular/angular',
+        "angular-cookies":'bower_components/angular-cookies/angular-cookies',
+        "angular-route":'bower_components/angular-route/angular-route',
+        "angular-translate":'bower_components/angular-translate/angular-translate',
+        "angular-translate-handler-log":'bower_components/angular-translate-handler-log/angular-translate-handler-log',
+        "angular-translate-loader-static-files":'bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files',
+        "angular-translate-loader-url":'bower_components/angular-translate-loader-url/angular-translate-loader-url',
+        "angular-translate-storage-cookie":'bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie',
+        "angular-translate-storage-local":'bower_components/angular-translate-storage-local/angular-translate-storage-local',
+        "bootstrap":'bower_components/bootstrap/dist/js/bootstrap',
+        "jquery":'bower_components/jquery/dist/jquery',
+        "ng-grid":'bower_components/ng-grid/ng-grid-2.0.12.debug',
+		"requireLib":"bower_components/requirejs/require",
+        "app":"js/app"
+    },
+
+	include:"requireLib",
+	name:"js/config",
+	out:"www/js/app-compiled.js"
+})
+```
+
+##Generate file with optimize or without optimize
+> r.js -o build.js
+> r.js -o build.js optimize=none
+
+##Modify index.html to only include the single script file:
+change
+> <script src="bower_components/requirejs/require.js" data-main="js/config"></script>
+to
+> <script src="js/app-compiled.js"></script>
+
 #ToDo
 - improve haxejs libraries
 - change haxejs.github.io and other showcase apps
