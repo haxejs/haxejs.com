@@ -152,7 +152,8 @@ to
  <script src="js/app-compiled.js"></script>
 ```
 
-#ToDo
-- improve haxejs libraries to try to automatically generate requirejs config and build profile files.
+#Haxejs improvement
+Now haxejs libraries can automatically generate requirejs module dependencies to require.json, which has paths and shim settings.
+You can copy/paste them to build profile and requirejs config files.
 
 
