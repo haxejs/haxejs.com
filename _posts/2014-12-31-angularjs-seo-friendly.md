@@ -12,26 +12,26 @@ Some people worry about the SEO friendness of SPA(single page application, like 
 
 Here are the steps to make [haxejs.com](http://haxejs.com) to be SEO-friendly:
 
-* Tell spiders to use the new crawling spec(revisit the site using the ?_escaped_fragment_= tag) to crawl our site
+###1. Tell spiders to use the new crawling spec(revisit the site using the ?_escaped_fragment_= tag) to crawl our site
 
 - Hashbang syntax
-   ```
+ ```
    	@:inject("$locationProvider")
 	public static var locationConfig:Dynamic = function(locationProvider:NgLocationProvider) {
 
 		locationProvider.html5Mode(false);
 
 		locationProvider.hashPrefix("!");
-		
+
 	}
-   ```
+ ```
 
 - Add fragment meta to every page
    ```
    <meta name="fragment" content="!">
    ```
 
-* Serve static html page from server-side when the query url with _escaped_fragment_
+###2. Serve static html page from server-side when the query url with _escaped_fragment_
  We use Prerender.io service to provide cached static content to spiders, here is the nginx configuration to make it happen:
  ```
     location / {
