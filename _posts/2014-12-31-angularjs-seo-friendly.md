@@ -15,7 +15,8 @@ Here are the steps to make [haxejs.com](http://haxejs.com) to be SEO-friendly:
 ###1. Tell spiders to use the new crawling spec(revisit the site using the ?_escaped_fragment_= tag) to crawl our site
 
 - Hashbang syntax
- ```
+
+```
    	@:inject("$locationProvider")
 	public static var locationConfig:Dynamic = function(locationProvider:NgLocationProvider) {
 
@@ -24,7 +25,7 @@ Here are the steps to make [haxejs.com](http://haxejs.com) to be SEO-friendly:
 		locationProvider.hashPrefix("!");
 
 	}
- ```
+```
 
 - Add fragment meta to every page
    ```
@@ -33,7 +34,8 @@ Here are the steps to make [haxejs.com](http://haxejs.com) to be SEO-friendly:
 
 ###2. Serve static html page from server-side when the query url with _escaped_fragment_
  We use Prerender.io service to provide cached static content to spiders, here is the nginx configuration to make it happen:
- ```
+
+```
     location / {
         try_files $uri @prerender;
     }
@@ -64,6 +66,6 @@ Here are the steps to make [haxejs.com](http://haxejs.com) to be SEO-friendly:
 	     proxy_pass http://www.haxejs.com;
         }
     }
- ```
+```
 
 Of cource you can take html snapshots of your site, store and serve them from your server, PhantomJS or zombie.js tools can help you.
