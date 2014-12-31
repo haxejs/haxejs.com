@@ -14,16 +14,19 @@ Here are the steps to make [haxejs.com](http://haxejs.com) to be SEO-friendly:
 
 * Tell spiders to use the new crawling spec(revisit the site using the ?_escaped_fragment_= tag) to crawl our site
 
- - Hashbang syntax
+- Hashbang syntax
    ```
    	@:inject("$locationProvider")
 	public static var locationConfig:Dynamic = function(locationProvider:NgLocationProvider) {
+
 		locationProvider.html5Mode(false);
+
 		locationProvider.hashPrefix("!");
+		
 	}
    ```
 
- - Add fragment meta to every page
+- Add fragment meta to every page
    ```
    <meta name="fragment" content="!">
    ```
