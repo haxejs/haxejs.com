@@ -40,15 +40,20 @@ The answer is YES.
 
 - Install OCaml
 > $ brew install ocaml
+> $ brew install opam
 
 ####2. Install hvm
 > haxelib install hvm
 
 ####3. Install and use stable haxe version(3.1.3)
 > haxelib run hvm --use 3.1.3
+> sudo neko /Users/kshi/work/haxe/lib/hvm/0,0,2/hvm.n --use 3.1.3
 
 ####4. Install and use latest development haxe version
 > haxelib run hvm --use development
+> sudo neko /Users/kshi/work/haxe/lib/hvm/0,0,2/hvm.n --use development
+
+if you meet compile error, please enter ~/.hvm/haxerepo folder, run ```sudo make clean```, then try again.
 
 ####5. Switch haxe version
 
