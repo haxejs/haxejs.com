@@ -41,6 +41,7 @@ Startup:
 [http://disciplinedentrepreneurship.com/](http://disciplinedentrepreneurship.com/)
 [http://businessmodelgeneration.com/](http://businessmodelgeneration.com/)
 [http://www.peterjthomson.com/2013/11/value-proposition-canvas](http://www.peterjthomson.com/2013/11/value-proposition-canvas)
+[http://www.jianshu.com/collection/LLCyGH](http://www.jianshu.com/collection/LLCyGH)
 - 号号大全 － 直通号(@海底捞)，公众号大全???
 - convert pdf/ppt/word to social sharing on mobile???
 [https://habitrpg.com](https://habitrpg.com)
@@ -51,6 +52,7 @@ OpenFL:
 
 Haxe:
 [www.haxe.org](www.haxe.org)
+[http://haxe.io/](http://haxe.io/)
 
 AVOS Cloud:
 [https://leancloud.cn/](https://leancloud.cn/)
