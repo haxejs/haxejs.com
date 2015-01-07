@@ -1,6 +1,6 @@
 ---
 layout: post_zh
-title: 一个（羽毛球）运动的平台
+title: 一个（羽毛球+）运动的平台
 description: 早期计划，用户研究与产品探索
 date: "2015-01-06 17:12:52 +0800"
 author: kmshi
@@ -10,7 +10,7 @@ keywords: haxe, javascript, js, html5, angular, wechat
 
 #春节前的主要目标
 
-##1.基本想清楚我们产品（或平台）的商业模式，制定一个A计划
+##1.基本想清楚我们产品（或平台）的商业模式，制定一个A计划 <span class="bg-primary">进行中</span>
 （种子用户访谈、市场、业务部分老姚为主－－1，2，3，5，6，9，其它老石）
 ##2.公司的组建，注册，两个微信服务号的认证，球友的需开通微信支付（老姚）
 ##3.基本完成A计划的产品（或平台）的原型设计（老石）
@@ -104,6 +104,9 @@ keywords: haxe, javascript, js, html5, angular, wechat
 
 <hr/>
 #B计划：－－找教练？
+
+<hr/>
+#C计划：－－其它（球类）运动？
 
 <hr/>
 #伙伴与资源的发展整合方向
