@@ -23,7 +23,7 @@ keywords: haxe, javascript, js, html5, angular, wechat
 －－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－
 #种子用户的发展
 
-##1.访谈（老姚）  ```进行中```
+##1.访谈（老姚）  <p class="bg-primary">进行中</p>
 
 － 球友，5~7人，选择有代表性的各类人员：偶尔玩的，经常玩的，高手等，建立典型用户档案（[模板](http://www.haxejs.com/ppts/201004%20%E4%BA%BA%E7%89%A9%E8%A7%92%E8%89%B2%EF%BC%88Persona%EF%BC%89%E5%AE%9E%E4%BE%8B.docx)）
 
@@ -103,12 +103,10 @@ keywords: haxe, javascript, js, html5, angular, wechat
 
 －－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－
 #伙伴与资源的发展整合方向
-##1. 关键伙伴
-
-- 平台依附伙伴
+##1. 平台依附伙伴
 > 腾讯(微信)
 
-- 流量伙伴
+##2. 流量伙伴
 > Baidu（地图LBS入口）
 
 > 高德（地图LBS入口）
@@ -118,14 +116,14 @@ keywords: haxe, javascript, js, html5, angular, wechat
 > 美团
 
 
-##2. 关键资源
+##3. 关键资源
 > 球馆
 
 > 球会
 
 > 注册球友
 
-##3. 主要活动
+##4. 主要活动
 > 订场(现场支付或网上支付)
 
 > 发布活动，报名参加活动
@@ -134,7 +132,7 @@ keywords: haxe, javascript, js, html5, angular, wechat
 
 > 分享订场、报名（活动或比赛）的信息到朋友圈
 
-##4. 客户关系维系
+##5. 客户关系维系
 > 促销、比赛信息推送
 
 > 球馆促进球友（球馆张贴推广我们的二维码，改进他们的预定与收费过程）
