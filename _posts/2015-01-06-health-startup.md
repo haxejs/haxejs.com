@@ -123,6 +123,8 @@ keywords: haxe, javascript, js, html5, angular, wechat
 
 > 注册球友
 
+> 行业协会？比赛组织机构？
+
 ##4. 主要活动
 > 订场(现场支付或网上支付)
 
@@ -143,7 +145,7 @@ keywords: haxe, javascript, js, html5, angular, wechat
 #培育产品的增长引擎([ref1](http://www.startuplessonslearned.com/2008/09/three-drivers-of-growth-for-your.html),[ref2](http://larslofgren.com/marketingbasics/the-three-engines-of-growth-with-eric-ries))
 ##1. 口碑(病毒式社交传播)
 ##2. 粘性(黏着式价值留住客户)
-##3. 广告或赠品(付费式推广)
+##3. 广告、地推、门店或赠品(付费式推广)
 
 －－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－
 #对手和竟品分析(SWOT analysis)

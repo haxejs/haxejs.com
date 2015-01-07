@@ -36,6 +36,8 @@ Javascript:
 [http://www.senchalabs.org/](http://www.senchalabs.org/)
 
 Startup:
+[http://steveblank.com/slides/](http://steveblank.com/slides/)
+[http://businessofsoftware.org/2013/02/kathy-sierra-building-the-minimum-badass-user-business-of-software-a-masterclass-in-thinking-about-software-product-development/](http://businessofsoftware.org/2013/02/kathy-sierra-building-the-minimum-badass-user-business-of-software-a-masterclass-in-thinking-about-software-product-development/)
 [http://blog.strategyzer.com/](http://blog.strategyzer.com/)
 [http://www.startersquad.com/](http://www.startersquad.com/)
 [http://disciplinedentrepreneurship.com/](http://disciplinedentrepreneurship.com/)
