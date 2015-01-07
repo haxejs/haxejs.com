@@ -23,7 +23,7 @@ keywords: haxe, javascript, js, html5, angular, wechat
 －－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－
 #种子用户的发展
 
-##1.访谈（老姚）  <p class="bg-primary">进行中</p>
+##1.访谈（老姚）  <span class="bg-primary">进行中</span>
 
 － 球友，5~7人，选择有代表性的各类人员：偶尔玩的，经常玩的，高手等，建立典型用户档案（[模板](http://www.haxejs.com/ppts/201004%20%E4%BA%BA%E7%89%A9%E8%A7%92%E8%89%B2%EF%BC%88Persona%EF%BC%89%E5%AE%9E%E4%BE%8B.docx)）
 
