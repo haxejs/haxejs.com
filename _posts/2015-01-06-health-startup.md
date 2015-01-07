@@ -16,11 +16,12 @@ keywords: haxe, javascript, js, html5, angular, wechat
 ##3.基本完成A计划的产品（或平台）的原型设计（老石）
 ##4.数据模型与接口的设计（老石）
 
-－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－
+<hr/>
+
 #沟通计划
 周三晚10:30～11:30，周六晚10:30～11:30 Skype（电话）会议
 
-－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－
+<hr/>
 #种子用户的发展
 
 ##1.访谈（老姚）  <span class="bg-primary">进行中</span>
@@ -40,7 +41,7 @@ keywords: haxe, javascript, js, html5, angular, wechat
 
 ##5.可考虑设计一些激励措施调动他们深度参与的热情？
 
-－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－
+<hr/>
 #球友与球会商业模式A计划
 ##1. 列出前三大问题（或痛点），目前的他们的替代方案是什么？
 > 老姚回答
@@ -70,7 +71,7 @@ keywords: haxe, javascript, js, html5, angular, wechat
 ##9. 获取、接触客户的渠道有哪些
 > 老姚回答
 
-－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－
+<hr/>
 
 #球馆商业模式A计划
 ##1. 列出前三大问题（或痛点），目前的他们的替代方案是什么？
@@ -101,7 +102,10 @@ keywords: haxe, javascript, js, html5, angular, wechat
 ##9. 获取、接触客户的渠道有哪些
 > 老姚回答
 
-－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－
+<hr/>
+#B计划：－－找教练？
+
+<hr/>
 #伙伴与资源的发展整合方向
 ##1. 平台依附伙伴
 > 腾讯(微信)
@@ -141,13 +145,13 @@ keywords: haxe, javascript, js, html5, angular, wechat
 
 > 球会促进球友（发布活动，分享推广到他们的群里）
 
-－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－
+<hr/>
 #培育产品的增长引擎([ref1](http://www.startuplessonslearned.com/2008/09/three-drivers-of-growth-for-your.html),[ref2](http://larslofgren.com/marketingbasics/the-three-engines-of-growth-with-eric-ries))
 ##1. 口碑(病毒式社交传播)
 ##2. 粘性(黏着式价值留住客户)
 ##3. 广告、地推、门店或赠品(付费式推广)
 
-－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－
+<hr/>
 #对手和竟品分析(SWOT analysis)
 
 ##1. 传统的方式
