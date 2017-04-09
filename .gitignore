@@ -5,6 +5,7 @@ project/test/unit
 project/test/e2e
 project/www/bower_components/
 project/www/js
+bower_components/ng-grid
 tmp
 .DS_Store
 .idea

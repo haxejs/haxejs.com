@@ -446,10 +446,13 @@ com.haxejs.PhotoEssaysCtrl.prototype = $extend(ng.BaseCtrl.prototype,{
 	}
 	,__class__: com.haxejs.PhotoEssaysCtrl
 });
-com.haxejs.SwitchLangCtrl = function(scope,translate) {
+com.haxejs.SwitchLangCtrl = function(scope,translate,location) {
 	ng.BaseCtrl.call(this,scope);
 	this.translate = translate;
 	this.blogPath = "/blog/" + translate.preferredLanguage() + "/";
+	var url = location.absUrl();
+	if(url.indexOf("?lang=en") > -1) this.changeLanguage("en");
+	if(url.indexOf("?lang=zh") > -1) this.changeLanguage("zh");
 };
 com.haxejs.SwitchLangCtrl.__name__ = ["com","haxejs","SwitchLangCtrl"];
 com.haxejs.SwitchLangCtrl.__super__ = ng.BaseCtrl;
@@ -482,7 +485,7 @@ com.haxejs.Controllers.main = function() {
 	com.haxejs.Controllers.photoEssaysCtrl.$inject = ["$scope","feedServ","$document"];
 	com.haxejs.Controllers.addressBookCtrl.$inject = ["$scope"];
 	com.haxejs.Controllers.twoWayBindingCtrl.$inject = ["$scope"];
-	com.haxejs.Controllers.switchLangCtrl.$inject = ["$scope","$translate"];
+	com.haxejs.Controllers.switchLangCtrl.$inject = ["$scope","$translate","$location"];
 	ng.Angular.module("com.haxejs").controller("switchLangCtrl",com.haxejs.Controllers.switchLangCtrl);
 	ng.Angular.module("com.haxejs").controller("twoWayBindingCtrl",com.haxejs.Controllers.twoWayBindingCtrl);
 	ng.Angular.module("com.haxejs").controller("addressBookCtrl",com.haxejs.Controllers.addressBookCtrl);
