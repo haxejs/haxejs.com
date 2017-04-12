@@ -14,7 +14,7 @@
     <meta name="author" content="Richard Shi, and Haxejs contributors">
     <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
     <!-- Bootstrap core CSS -->
-    <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
     <!-- Documentation extras -->
     <link href="/css/docs.min.css" rel="stylesheet">
     <style type="text/css">
@@ -40,7 +40,7 @@
     </style>
 </head>
 <body class="bs-docs-home">
-    <!-- Docs master nav -->
+    <!-- Docs master nav 
     <header class="navbar navbar-static-top bs-docs-nav" id="top" role="banner">
       <div class="container">
         <div class="navbar-header">
@@ -55,28 +55,27 @@
         <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
 
           <ul class="nav navbar-nav">   
-            <li><a href="/#!/understand?lang=zh">概况简述</a></li>
-            <li><a href="/#!/getstarted?lang=zh">新手起步</a></li>
-            <li><a href="/#!/kanduoduo?lang=zh">看多多玩围观</a></li>
-            <li><a href="/blog/zh/">博客</a></li>
-            <!--
-            <li><a href="/#!/showcase"   translate="SHOWCASE_TITLE"></a></li>
-            -->
+            <li><a href="/#!/understand">概况简述</a></li>
+            <li><a href="/#!/getstarted">新手起步</a></li>
+            <li><a href="/#!/kanduoduo">看多多玩围观</a></li>
+            <li><a href="/blog/zh/">博客</a></li>            
+            <li><a href="/#!/showcase"   translate="SHOWCASE_TITLE"></a></li>            
           </ul>
-        <!--
+
           <ul class="nav navbar-nav navbar-right">
             <li><a href="http://demo.haxejs.com" >Demo</a></li>
             <li><a href="http://forum.haxejs.com" >Forum</a></li>
           </ul>
-        -->
+        
           <ul class="nav navbar-nav navbar-right">
             <li><a href="/blog/zh/">中文</a></li>
             <li><a href="/blog/en/">英文</a></li>
           </ul>
+
         </nav>
       </div>
     </header>
-
+    -->
     <div class="bs-docs-header" id="content">
       <div class="container">
         <h1>{{ page.title }}</h1>
@@ -105,11 +104,11 @@
           </ul>
         </div>
 		-->
-
+    <!--
         <p>This website is created with haxejs-angular by the <a href="https://github.com/haxejs?tab=members">core team</a> with the help of <a href="https://github.com/haxejs/haxejs-angular/graphs/contributors">our contributors</a>.</p>
         <p>Code licensed under <a href="https://github.com/haxejs/haxejs-angular/blob/master/LICENSE" target="_blank">MIT</a>, documentation under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>
         <ul class="bs-docs-footer-links muted">
-        <!--
+        
           <li><a href="https://github.com/haxejs/haxejs-angular">GitHub</a></li>
           <li>&middot;</li>
           <li><a href="http://demo.haxejs.com">Demo</a></li>
@@ -117,11 +116,14 @@
           <li><a href="http://forum.haxejs.com">Forum</a></li>
           <li>&middot;</li>
           <li translate="BEIAN"></li>
-        -->          
+        </ul>
+    --> 
+        <ul class="bs-docs-footer-links muted">
+          <li><a href='http://www.miitbeian.gov.cn/' rel='nofollow' target='_blank'>粤ICP备14057671号</a></li>
         </ul>
       </div>
     </footer>    
-    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
 </body>
 </html>
