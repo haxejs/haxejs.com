@@ -37,6 +37,11 @@ http://shadowsocks.org/en/download/clients.html
 
 ### 二、怎样安装平行世界的安卓市场里的app?
 
-1. 在手机应用市场搜索并安装谷歌安装器，或者从http://www.googleinstaller.org/，http://www.gugeanzhuangqi.com/等下载，进入google play store前要先连接VPN，才能完成全部过程.
+1. 在手机应用市场搜索并安装谷歌安装器，或者从
+http://www.googleinstaller.org/
+http://www.gugeanzhuangqi.com/
+等下载，进入google play store前要先连接VPN，才能完成全部过程.
 
-2. 你可能发现即使连接了VPN，在google play store里根本下载不了任何应用，老是连接被重置。这样你就需要打开https://apkpure.com/下载一个apkpure,从apkpure市场里安装你需要的任何app了
+2. 你可能发现即使连接了VPN，在google play store里根本下载不了任何应用，老是连接被重置。这样你就需要打开
+https://apkpure.com/
+下载一个apkpure,从apkpure市场里安装你需要的任何app了
