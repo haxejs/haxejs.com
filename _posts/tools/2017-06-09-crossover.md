@@ -45,3 +45,5 @@ http://www.gugeanzhuangqi.com/
 2. 你可能发现即使连接了VPN，在google play store里根本下载不了任何应用，老是连接被重置。这样你就需要打开
 https://apkpure.com/
 下载一个apkpure,从apkpure市场里安装你需要的任何app了
+
+![apps in another world](/resources/crossover.jpg "apps in another world")
