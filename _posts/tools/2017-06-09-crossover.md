@@ -1,14 +1,14 @@
 ---
-layout: post_zh
+layout: post
 title: 连接，跨越平行的世界
 description: 怎样使用亚马逊AWS免费套餐科学上网？怎样安装平行世界的安卓市场里的app?
 date: "2017-06-09 22:35:52 +0800"
 author: Sid
-categories: [tools]
+categories: [技术]
 keywords: 科学上网,app,docker,vpn,shadowsocks
 ---
 
-
+{% include JB/setup %}
 
 ### 一、怎样使用亚马逊AWS免费套餐科学上网？
 
@@ -46,4 +46,4 @@ http://www.gugeanzhuangqi.com/
 https://apkpure.com/
 下载一个apkpure,从apkpure市场里安装你需要的任何app了
 
-![apps in another world](/resources/crossover.jpg "apps in another world")
+<img src="/resources/crossover.jpg" class="img-responsive" alt="apps in another world">
