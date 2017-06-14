@@ -8,7 +8,7 @@ tags: [点子,市场]
 ---
 {% include JB/setup %}
 
-<hr/>
+<img src="/resources/primer/idea2-cover.svg" class="img-responsive"/>
 
 1. 怎么才能知道一个商业点子是好的？
 2. 完成一个大的点子需要开展哪些步骤？
